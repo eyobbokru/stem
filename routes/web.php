@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CourseController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -43,4 +44,5 @@ Route::middleware([
 ])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/school', SchoolController::class);
     Route::resource('/teacher', TeacherController::class);
+    Route::resource('/course', CourseController::class);
 });
