@@ -61,7 +61,7 @@
       <nav class="mt-10">
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[false ? activeClass : inactiveClass]"
+          :class="[$page.url === '/dashboard' ? activeClass : inactiveClass]"
           :href="route('dashboard')"
         >
           <svg
@@ -85,7 +85,19 @@
 
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[route('admin.school.index') ? activeClass : inactiveClass]"
+          :class="[
+            $page.url === '/admin/management' ? activeClass : inactiveClass,
+          ]"
+          :href="route('admin.management.index')"
+        >
+          <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+          <span class="mx-4">Management</span>
+        </Link>
+
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$page.url === '/admin/school' ? activeClass : inactiveClass]"
           :href="route('admin.school.index')"
         >
           <img src="/images/school.svg" alt="school" class="w-5 h-5" />
@@ -95,56 +107,12 @@
 
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          to="/tables"
-          :class="[false ? activeClass : inactiveClass]"
-        >
-          <!-- :class="[$route.name === 'Tables' ? activeClass : inactiveClass]" -->
-          <svg
-            class="w-5 h-5"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M7 3C6.44772 3 6 3.44772 6 4C6 4.55228 6.44772 5 7 5H13C13.5523 5 14 4.55228 14 4C14 3.44772 13.5523 3 13 3H7Z"
-              fill="currentColor"
-            />
-            <path
-              d="M4 7C4 6.44772 4.44772 6 5 6H15C15.5523 6 16 6.44772 16 7C16 7.55228 15.5523 8 15 8H5C4.44772 8 4 7.55228 4 7Z"
-              fill="currentColor"
-            />
-            <path
-              d="M2 11C2 9.89543 2.89543 9 4 9H16C17.1046 9 18 9.89543 18 11V15C18 16.1046 17.1046 17 16 17H4C2.89543 17 2 16.1046 2 15V11Z"
-              fill="currentColor"
-            />
-          </svg>
-
-          <span class="mx-4">Tables</span>
-        </Link>
-
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[false ? activeClass : inactiveClass]"
-          to="/forms"
-        >
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-              clip-rule="evenodd"
-            />
-          </svg>
-
-          <span class="mx-4">Forms</span>
-        </Link>
-
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[false ? activeClass : inactiveClass]"
-          to="/cards"
+          :class="[
+            $page.url.startsWith('/admin/gradeStudent')
+              ? activeClass
+              : inactiveClass,
+          ]"
+          :href="route('admin.gradeStudent.index')"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -160,12 +128,32 @@
             />
           </svg>
 
-          <span class="mx-4">Cards</span>
+          <span class="mx-4">Grade</span>
+        </Link>
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/admin/academicSession')
+              ? activeClass
+              : inactiveClass,
+          ]"
+          :href="route('admin.academicSession.index')"
+        >
+          <img
+            src="/images/degre.svg"
+            alt="degree"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Academic Session</span>
         </Link>
 
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[false ? activeClass : inactiveClass]"
+          :class="[
+            $page.url.startsWith('/admin/course') ? activeClass : inactiveClass,
+          ]"
           :href="route('admin.course.index')"
         >
           <img
@@ -180,7 +168,11 @@
 
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[false ? activeClass : inactiveClass]"
+          :class="[
+            $page.url.startsWith('/admin/teacher')
+              ? activeClass
+              : inactiveClass,
+          ]"
           :href="route('admin.teacher.index')"
         >
           <img
@@ -191,6 +183,186 @@
           />
           <span class="mx-4">Teacher</span>
         </Link>
+
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/admin/lab') ? activeClass : inactiveClass,
+          ]"
+          :href="route('admin.lab.index')"
+        >
+          <img
+            src="/images/lab.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Lab</span>
+        </Link>
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/admin/student')
+              ? activeClass
+              : inactiveClass,
+          ]"
+          :href="route('admin.student.index')"
+        >
+          <img
+            src="/images/student.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Student</span>
+        </Link>
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/admin/certificates')
+              ? activeClass
+              : inactiveClass,
+          ]"
+          :href="route('admin.certificates.index')"
+        >
+          <img
+            src="/images/student.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Certificate</span>
+        </Link>
+
+        <div class="">
+          <div>
+            <div class="dropdown relative">
+              <a
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url.startsWith('/admin/student')
+                    ? activeClass
+                    : inactiveClass,
+                ]"
+                href="#"
+                type="button"
+                id="dropdownMenuButton2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown link
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fas"
+                  data-icon="caret-down"
+                  class="w-4 ml-4"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 320 512"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                  ></path>
+                </svg>
+              </a>
+              <ul
+                class="
+                  dropdown-menu
+                  min-w-max
+                  absolute
+                  hidden
+                  bg-gray-800
+                  text-base
+                  z-50
+                  float-left
+                  py-2
+                  list-none
+                  text-left
+                  rounded-lg
+                  shadow-lg
+                  mt-1
+                  hidden
+                  m-0
+                  bg-clip-padding
+                  border-none
+                "
+                aria-labelledby="dropdownMenuButton2"
+              >
+                <li>
+                  <Link
+                    class="
+                      flex
+                      items-center
+                      px-6
+                      py-2
+                      mt-4
+                      duration-200
+                      border-l-4
+                    "
+                    :class="[
+                      $page.url.startsWith('/admin/student')
+                        ? activeClass
+                        : inactiveClass,
+                    ]"
+                    :href="route('admin.student.index')"
+                  >
+                    <img
+                      src="/images/student.svg"
+                      alt="lab"
+                      class="w-5 h-5"
+                      fill="currentColor"
+                    />
+
+                    <span class="mx-4">Student</span>
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    class="
+                      dropdown-item
+                      text-sm
+                      py-2
+                      px-4
+                      font-normal
+                      block
+                      w-full
+                      whitespace-nowrap
+                      bg-transparent
+                      text-gray-700
+                      hover:bg-gray-100
+                    "
+                    href="#"
+                    >Another action</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="
+                      dropdown-item
+                      text-sm
+                      py-2
+                      px-4
+                      font-normal
+                      block
+                      w-full
+                      whitespace-nowrap
+                      bg-transparent
+                      text-gray-700
+                      hover:bg-gray-100
+                    "
+                    href="#"
+                    >Something else here</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
   </div>
@@ -206,6 +378,6 @@ const activeClass = ref(
   "bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100"
 );
 const inactiveClass = ref(
-  "border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100"
+  "border-gray-900 text-gray-500 hover:bg-white-100 hover:bg-opacity-25 hover:text-gray-100 "
 );
 </script>
