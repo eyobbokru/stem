@@ -84,7 +84,7 @@ class CertificateController extends Controller
     public function show($id)
     {
         $pdf = PDF::loadView('Certificate', compact(''));
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('a4', 'landscape');
         return $pdf->download('attendance.pdf');
     }
 
@@ -97,7 +97,7 @@ class CertificateController extends Controller
     public function edit($id)
     {
         $pdf = PDF::loadView('Certificate');
-
+        $pdf->setPaper('a4', 'landscape');
         return $pdf->download('attendance.pdf');
 
         return back();

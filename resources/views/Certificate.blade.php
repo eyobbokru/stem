@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Document</title>
     <style>
    body {
     font-family: Roboto;
+
+
 }
 
 .certificate-container {
-    padding: 50px;
+    /* padding: 50px; */
     width: 1024px;
 }
 .certificate {
     border: 20px solid #0C5280;
-    padding: 25px;
-    height: 600px;
-    width:100%;
+    /* padding: 25px; */
+    height: 650px;
+   
     position: relative;
 }
 
@@ -82,9 +84,11 @@ h1 {
     <div class="certificate-container">
         <div class="certificate">
             <div class="water-mark-overlay"></div>
+
             <div class="certificate-header">
                 <img src="https://rnmastersreview.com/img/logo.png" class="logo" alt="">
             </div>
+
             <div class="certificate-body">
                
                 <p class="certificate-title"><strong>RENR NCLEX AND CONTINUING EDUCATION (CME) Review Masters</strong></p>
@@ -92,9 +96,11 @@ h1 {
                 <p class="student-name">Matthew Taylor</p>
                 <div class="certificate-content">
                     <div class="about-certificate">
+                        
                         <p>
                     has completed [hours] hours on topic title here online on Date [Date of Completion]
                     </p>
+
                     </div>
                     <p class="topic-title">
                         The Topic consists of [hours] Continuity hours and includes the following:
