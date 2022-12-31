@@ -189,6 +189,7 @@ class GradeController extends Controller
         $student_list = array();
 
         $students = $student->chunk($course)->all();
+
         foreach ($students as $std) {
             foreach ($std as $stud) {
                 array_push($course_list, $stud->course_name);

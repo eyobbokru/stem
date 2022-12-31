@@ -111,10 +111,48 @@
                     :key="academicSession.id"
                     class="text-gray-700"
                   >
-                    <td class="px-4 py-3 border">{{ academicSession.name }}</td>
+                    <td class="px-4 py-3 border">
+                      {{ academicSession.name }}
+                    </td>
 
                     <td class="px-4 py-3 text-sm border">
                       <div class="flex justify-around">
+                        <div class="flex justify-center">
+                          <form @submit.prevent="storeParam">
+                            <div class="form-check form-switch">
+                              <input
+                                class="
+                                  form-check-input
+                                  appearance-none
+                                  w-9
+                                  -ml-10
+                                  rounded-full
+                                  float-left
+                                  h-5
+                                  align-top
+                                  bg-white bg-no-repeat bg-contain bg-green-300
+                                  focus:outline-none
+                                  cursor-pointer
+                                  shadow-sm
+                                "
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckChecked"
+                                v-model="form.id"
+                                :checked="academicSession.active"
+                              />
+                              <label
+                                class="
+                                  form-check-label
+                                  inline-block
+                                  text-gray-800
+                                "
+                                for="flexSwitchCheckChecked"
+                                >Activate</label
+                              >
+                            </div>
+                          </form>
+                        </div>
                         <Link
                           :href="
                             route(
@@ -185,6 +223,10 @@ const props = defineProps({
 const search = ref("");
 const perPage = ref(5);
 
+const form = useForm({
+  id: "",
+});
+
 watch(search, (value) => {
   Inertia.get(
     "/admin/academicSession",
@@ -205,6 +247,10 @@ function getTags() {
       replace: true,
     }
   );
+}
+
+function storeParam() {
+  form.post("/admin/academicSession/{id}");
 }
 </script>
 

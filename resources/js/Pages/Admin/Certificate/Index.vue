@@ -177,8 +177,9 @@
                             py-2
                             rounded-lg
                           "
-                          download
                         >
+                          <!-- download -->
+
                           Certificate
                         </a>
                         <!--

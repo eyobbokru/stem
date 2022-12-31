@@ -83,9 +83,6 @@ class CertificateController extends Controller
      */
     public function show($id)
     {
-        $pdf = PDF::loadView('Certificate', compact(''));
-        $pdf->setPaper('a4', 'landscape');
-        return $pdf->download('attendance.pdf');
     }
 
     /**
@@ -96,6 +93,19 @@ class CertificateController extends Controller
      */
     public function edit($id)
     {
+        // dd("hello edit");
+
+        // TODO check if the student have grade filled else grade is n't completed
+        // check academic session which 
+        // if in get null or zero for result then the return not yet else prepare per academic session and 
+        // courses
+        $student =  Student::where('students.id', $id)
+            ->leftJoin('grades', 'grades.student_id', '=', 'students.id')
+            // ->Join('courses', 'grades.course_id', 'courses.id')
+            ->get();
+
+        dd($student);
+
         $pdf = PDF::loadView('Certificate');
         $pdf->setPaper('a4', 'landscape');
         return $pdf->download('attendance.pdf');
