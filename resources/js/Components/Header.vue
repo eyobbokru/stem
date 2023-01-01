@@ -133,7 +133,7 @@
             "
           >
             <a
-              href="#"
+              :href="route('profile.show')"
               class="
                 block
                 px-4
@@ -143,28 +143,20 @@
               "
               >Profile</a
             >
-            <a
-              href="#"
-              class="
-                block
-                px-4
-                py-2
-                text-sm text-gray-700
-                hover:bg-indigo-600 hover:text-white
-              "
-              >Products</a
-            >
-            <router-link
-              to="/"
-              class="
-                block
-                px-4
-                py-2
-                text-sm text-gray-700
-                hover:bg-indigo-600 hover:text-white
-              "
-              >Log out</router-link
-            >
+            <form @submit.prevent="logout">
+              <button
+                href=""
+                class="
+                  block
+                  px-4
+                  py-2
+                  text-sm text-gray-700
+                  hover:bg-indigo-600 hover:text-white
+                "
+              >
+                Log Out
+              </button>
+            </form>
           </div>
         </transition>
       </div>
@@ -175,11 +167,14 @@
 <script setup lang="ts">
 import { useSidebar } from "../hooks/useSidebar";
 
-import { Link } from "@inertiajs/inertia-vue3";
-
 import { ref, watch, defineProps } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 
 const dropdownOpen = ref(false);
 const { isOpen } = useSidebar();
+
+const logout = () => {
+  Inertia.post(route("logout"));
+};
 </script>

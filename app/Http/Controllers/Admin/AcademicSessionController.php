@@ -61,8 +61,6 @@ class AcademicSessionController extends Controller
     public function store(StoreAcademicSessionRequest $request)
     {
 
-
-
         $academicSession =  AcademicSession::create([
             'name' => Request::input('name'),
             'academicYear' => Request::input('academicYear'),

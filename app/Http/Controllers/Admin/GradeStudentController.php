@@ -13,6 +13,15 @@ use Inertia\Inertia;
 
 class GradeStudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:gradeStudent list', ['only' => ['index', 'show']]);
+        $this->middleware('can:gradeStudent create', ['only' => ['create', 'store']]);
+        $this->middleware('can:gradeStudent edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:gradeStudent delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

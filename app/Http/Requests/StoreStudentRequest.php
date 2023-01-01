@@ -33,6 +33,7 @@ class StoreStudentRequest extends FormRequest
             'school_id' => 'required',
             'academic_session_id' => 'required',
             'group_id' => 'required',
+            'isProject' => '',
 
         ];
     }

@@ -18,6 +18,14 @@ use App\Http\Requests\UpdateStudentRequest;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:student list', ['only' => ['index', 'show']]);
+        $this->middleware('can:student create', ['only' => ['create', 'store']]);
+        $this->middleware('can:student edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:student delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -65,6 +73,7 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
+
 
         // $student =  Student::create([
         //     'name' => Request::input('name'),

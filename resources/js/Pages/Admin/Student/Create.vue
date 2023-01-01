@@ -289,6 +289,31 @@
                           {{ form.errors.group_id }}
                         </div>
                       </div>
+                      <div>
+                        <label class="text-gray-700" for="group_id"
+                          >Project
+                        </label>
+                        <label>
+                          <input
+                            type="checkbox"
+                            class="
+                              w-5
+                              h-5
+                              text-indigo-600
+                              rounded-md
+                              focus:ring-indigo-500
+                            "
+                            name="radio"
+                            v-model="form.isProject"
+                          />
+                        </label>
+                        <div
+                          class="text-sm text-red-400"
+                          v-if="form.errors.isProject"
+                        >
+                          {{ form.errors.isProject }}
+                        </div>
+                      </div>
                     </div>
 
                     <div class="flex justify-end mt-4">
@@ -344,6 +369,7 @@ const form = useForm({
   grade_id: "",
   academic_session_id: "",
   group_id: "",
+  isProject: false,
 });
 
 function register() {

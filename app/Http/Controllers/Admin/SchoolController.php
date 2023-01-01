@@ -13,6 +13,14 @@ use App\Http\Requests\UpdateSchoolRequest;
 
 class SchoolController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:school list', ['only' => ['index', 'show']]);
+        $this->middleware('can:school create', ['only' => ['create', 'store']]);
+        $this->middleware('can:school edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:school delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

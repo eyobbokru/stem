@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Spatie\Permission\Models\Role;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +22,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'coordinator']);
+        Role::create(['name' => 'museum']);
     }
 }

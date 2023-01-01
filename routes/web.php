@@ -8,19 +8,23 @@ use App\Models\AcademicSession;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Admin\LabController;
-use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\Admin\RoleController;
 
+use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
-use App\Http\Controllers\Admin\ManagementController;
-use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Museum\MuseumController;
 
+use App\Http\Controllers\Admin\ManagementController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\GradeReportController;
 use App\Http\Controllers\Admin\PdfGenerateController;
 use App\Http\Controllers\Admin\GradeStudentController;
 use App\Http\Controllers\Admin\AcademicSessionController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +59,9 @@ Route::middleware([
 
 Route::middleware([
     'auth:sanctum',
-
+    config('jetstream.auth_session'),
+    'verified',
+    // 'role:admin'
 ])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/school', SchoolController::class);
     Route::resource('/teacher', TeacherController::class);
@@ -69,7 +75,27 @@ Route::middleware([
     Route::resource('/grade', GradeController::class);
     Route::resource('/certificates', CertificateController::class);
 
+    Route::resource('/role', RoleController::class);
+    Route::resource('/permission', PermissionController::class);
+
     Route::get('/attendance', [PdfGenerateController::class, 'attendance'])->name('attendance');
     Route::get('/grades', [GradeController::class, 'grade'])->name('grades');
     // Route::get('/certificates', [CertificateController::class, 'grade'])->name('grades');
 });
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    // 'role:admin'
+])->prefix('stem')->name('stem.')->group(function () {
+
+    Route::resource('/museum', MuseumController::class);
+    Route::resource('/news', NewsController::class);
+});
+
+// outside
+Route::get('/museum', function () {
+    return Inertia::render('General/museumIndex');
+})->name('museum');

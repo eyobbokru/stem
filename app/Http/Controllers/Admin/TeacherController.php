@@ -13,6 +13,14 @@ use Inertia\Inertia;
 
 class TeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:teacher list', ['only' => ['index', 'show']]);
+        $this->middleware('can:teacher create', ['only' => ['create', 'store']]);
+        $this->middleware('can:teacher edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:teacher delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -13,6 +13,15 @@ use Inertia\Inertia;
 
 class LabController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:lab list', ['only' => ['index', 'show']]);
+        $this->middleware('can:lab create', ['only' => ['create', 'store']]);
+        $this->middleware('can:lab edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:lab delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

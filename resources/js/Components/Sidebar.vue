@@ -236,6 +236,77 @@
 
           <span class="mx-4">Certificate</span>
         </Link>
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/admin/role') ? activeClass : inactiveClass,
+          ]"
+          :href="route('admin.role.index')"
+          v-if="$page.props.permission.includes('role list')"
+        >
+          <img
+            src="/images/student.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Role</span>
+        </Link>
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/admin/permission')
+              ? activeClass
+              : inactiveClass,
+          ]"
+          :href="route('admin.permission.index')"
+        >
+          <img
+            src="/images/student.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Permission</span>
+        </Link>
+
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/stem/museum') ? activeClass : inactiveClass,
+          ]"
+          :href="route('stem.museum.index')"
+        >
+          <!-- v-if="$page.props.permission.includes('museum list')" -->
+          <img
+            src="/images/student.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Museum Management</span>
+        </Link>
+
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/stem/news') ? activeClass : inactiveClass,
+          ]"
+          :href="route('stem.news.index')"
+        >
+          <!-- v-if="$page.props.permission.includes('museum list')" -->
+          <img
+            src="/images/student.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">News</span>
+        </Link>
 
         <div class="">
           <div>
@@ -253,7 +324,7 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown link
+                Student Management
                 <svg
                   aria-hidden="true"
                   focusable="false"

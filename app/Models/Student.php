@@ -10,7 +10,7 @@ class Student extends Model
     use HasFactory;
     protected $fillable = [
         'name', 'fname', 'lname', 'sex', 'age', 'grade_id', 'school_id', 'academic_session_id',
-        'group_id'
+        'group_id', 'isProject'
     ];
 
     public function grade()
