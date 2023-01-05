@@ -1,7 +1,9 @@
 <template>
   <DashboardLayout title="Dashboard">
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">News</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        Museum Items
+      </h2>
     </template>
 
     <div class="py-2">
@@ -9,7 +11,7 @@
         <section class="container mx-auto p-6 font-mono">
           <div class="w-full flex mb-4 p-2 justify-end">
             <Link
-              :href="route('stem.news.create')"
+              :href="route('stem.museumItems.create')"
               class="
                 px-4
                 py-2
@@ -20,7 +22,7 @@
               "
               v-if="can.create"
             >
-              Create News
+              Create Museum Item
             </Link>
           </div>
 
@@ -99,18 +101,18 @@
                       border-b border-gray-600
                     "
                   >
-                    <th class="px-4 py-3">Title</th>
+                    <th class="px-4 py-3">Institution Name</th>
 
                     <th class="px-4 py-3">Manage</th>
                   </tr>
                 </thead>
                 <tbody class="bg-white">
                   <tr
-                    v-for="new_s in news.data"
-                    :key="new_s.id"
+                    v-for="museumItem in museumItems.data"
+                    :key="museumItem.id"
                     class="text-gray-700"
                   >
-                    <td class="px-4 py-3 border">{{ new_s.title }}</td>
+                    <td class="px-4 py-3 border">{{ museumItem.name }}</td>
 
                     <td class="px-4 py-3 text-sm border">
                       <div
@@ -118,7 +120,7 @@
                         v-if="can.edit || can.delete || can.show"
                       >
                         <Link
-                          :href="route('stem.news.show', new_s.id)"
+                          :href="route('stem.museumItems.show', museumItem.id)"
                           class="
                             bg-indigo-500
                             hover:bg-green-700
@@ -132,7 +134,7 @@
                           Show
                         </Link>
                         <Link
-                          :href="route('stem.news.edit', new_s.id)"
+                          :href="route('stem.museumItems.edit', museumItem.id)"
                           class="
                             bg-green-500
                             hover:bg-green-700
@@ -146,7 +148,9 @@
                           Edit
                         </Link>
                         <Link
-                          :href="route('stem.news.destroy', new_s.id)"
+                          :href="
+                            route('stem.museumItems.destroy', museumItem.id)
+                          "
                           method="delete"
                           as="button"
                           type="button"
@@ -168,7 +172,7 @@
                 </tbody>
               </table>
               <div class="m-2 p-2">
-                <Pagination :links="news.links" />
+                <Pagination :links="museumItems.links" />
               </div>
             </div>
           </div>
@@ -186,7 +190,7 @@ import { ref, watch, defineProps } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps({
-  news: Object,
+  museumItems: Object,
   filters: Object,
 
   can: {
@@ -200,7 +204,7 @@ const perPage = ref(5);
 
 watch(search, (value) => {
   Inertia.get(
-    "/stem/new",
+    "/stem/museumItems",
     { search: value, perPage: perPage.value },
     {
       preserveState: true,
@@ -211,7 +215,7 @@ watch(search, (value) => {
 
 function getTags() {
   Inertia.get(
-    "/stem/new",
+    "/stem/museumItems",
     { perPage: perPage.value, search: search.value },
     {
       preserveState: true,

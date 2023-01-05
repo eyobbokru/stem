@@ -59,13 +59,22 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
-        News::create([
-            'title' => Request::input('title'),
-            'description' => Request::input('description'),
-            'remark' => Request::input('remark'),
-        ]);
+        $news = new News();
+        $news->title = $request->input('title');
+        $news->description = $request->input('description');
 
-        return Redirect::route('stem.museum.index')->with('flash.banner', 'Museum Created successfully');
+        if ($request->hasFile('imagePath')) {
+            $file = $request->file('imagePath');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('public/Image'), $filename);
+            $news->imagePath = $filename;
+        } else {
+            $news->imagePath = Null;
+        }
+
+        $news->save();
+
+        return Redirect::route('stem.news.index')->with('flash.banner', 'News Created successfully');
     }
 
     /**
@@ -76,7 +85,10 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return Inertia::render('Admin/News/Create', []);
+
+        return Inertia::render('Admin/News/Show', [
+            'news' => $news
+        ]);
     }
 
     /**
@@ -99,7 +111,29 @@ class NewsController extends Controller
      */
     public function update(UpdateNewsRequest $request, News $news)
     {
-        //
+
+
+        $news->title = $request->input('title');
+        $news->description = $request->input('description');
+
+        if ($request->hasFile('imagePath')) {
+            $path = public_path() . '/public/Image/';
+
+            if ($news->imagePath) {
+                $file_old = $path . $news->imagePath;
+                unlink($file_old);
+            }
+
+            $file = $request->file('imagePath');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('public/Image'), $filename);
+            $news->imagePath = $filename;
+        }
+
+        $news->save();
+
+
+        return Redirect::route('stem.news.index')->with('flash.banner', 'News Updated successfully');
     }
 
     /**

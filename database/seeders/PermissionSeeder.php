@@ -67,5 +67,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'museum edit']);
         Permission::create(['name' => 'museum create']);
         Permission::create(['name' => 'museum delete']);
+
+        //museumItem
+        Permission::create(['name' => 'museumItem list']);
+        Permission::create(['name' => 'museumItem edit']);
+        Permission::create(['name' => 'museumItem create']);
+        Permission::create(['name' => 'museumItem delete']);
     }
 }

@@ -2,7 +2,7 @@
   <DashboardLayout title="create lab">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Create News
+        Create museum Item
       </h2>
     </template>
 
@@ -11,7 +11,7 @@
         <section class="container mx-auto p-6 font-mono">
           <div class="w-full flex mb-4 p-2">
             <Link
-              :href="route('stem.news.index')"
+              :href="route('stem.museumItems.index')"
               class="
                 bg-green-500
                 hover:bg-green-700
@@ -38,18 +38,18 @@
           >
             <form @submit.prevent="storeParam">
               <div>
-                <jet-label for="title" value="Institution Name" />
+                <jet-label for="title" value="Name" />
                 <jet-input
                   id="title"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="form.title"
+                  v-model="form.name"
                   autofocus
                   autocomplete="title"
                   required
                 />
-                <div class="text-sm text-red-400" v-if="form.errors.title">
-                  {{ form.errors.title }}
+                <div class="text-sm text-red-400" v-if="form.errors.name">
+                  {{ form.errors.name }}
                 </div>
 
                 <jet-label for="title" value="Content" />
@@ -105,8 +105,8 @@
     </div>
   </DashboardLayout>
 </template>
-        
-        <script setup>
+          
+          <script setup>
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref, watch } from "vue";
@@ -144,24 +144,24 @@ const editorConfig = {
 };
 
 const props = defineProps({
-  news: Object,
+  museumItems: Object,
 });
 
 const form = useForm({
-  title: props.news.title,
-  description: props.news.description,
-  imagePath: props.news.imagePath,
+  name: props.museumItems.name,
+  description: props.museumItems.description,
+  imagePath: props.museumItems.imagePath,
 });
 
 function storeParam() {
-  //   form.put("/stem/news/" + props.news.id);
+  //   form.put("/stem/museumItems/" + props.museumItems.id);
 
-  Inertia.post(`/stem/news/${props.news.id}`, {
+  Inertia.post(`/stem/museumItems/${props.museumItems.id}`, {
     _method: "put",
-    title: form.title,
+    name: form.name,
     description: form.description,
     imagePath: form.imagePath,
   });
 }
 </script>
-        
+          

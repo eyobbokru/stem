@@ -2,7 +2,7 @@
   <DashboardLayout title="create lab">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Create News
+        Create Museum Item
       </h2>
     </template>
 
@@ -11,7 +11,7 @@
         <section class="container mx-auto p-6 font-mono">
           <div class="w-full flex mb-4 p-2">
             <Link
-              :href="route('stem.news.index')"
+              :href="route('stem.museumItems.index')"
               class="
                 bg-green-500
                 hover:bg-green-700
@@ -38,21 +38,22 @@
           >
             <form @submit.prevent="storeParam">
               <div>
-                <jet-label for="title" value="Institution Name" />
+                <jet-label for="title" value="Name" />
                 <jet-input
                   id="title"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="form.title"
+                  v-model="form.name"
                   autofocus
                   autocomplete="title"
                   required
                 />
-                <div class="text-sm text-red-400" v-if="form.errors.title">
-                  {{ form.errors.title }}
+                <div class="text-sm text-red-400" v-if="form.errors.name">
+                  {{ form.errors.name }}
                 </div>
 
                 <jet-label for="title" value="Content" />
+
                 <ckeditor
                   :editor="editor"
                   v-model="form.description"
@@ -74,9 +75,7 @@
                   type="file"
                   @input="form.imagePath = $event.target.files[0]"
                 />
-                <a :href="'/public/Image/' + form.imagePath">{{
-                  form.imagePath
-                }}</a>
+
                 <progress
                   v-if="form.progress"
                   :value="form.progress.percentage"
@@ -94,7 +93,7 @@
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                   >
-                    Update
+                    ADD
                   </jet-button>
                 </div>
               </div>
@@ -113,7 +112,6 @@ import { ref, watch } from "vue";
 import JetButton from "@/Jetstream/Button.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetLabel from "@/Jetstream/Label.vue";
-import { Inertia } from "@inertiajs/inertia";
 
 import CKEditor from "@ckeditor/ckeditor5-vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -143,25 +141,16 @@ const editorConfig = {
   },
 };
 
-const props = defineProps({
-  news: Object,
-});
+const props = defineProps({});
 
 const form = useForm({
-  title: props.news.title,
-  description: props.news.description,
-  imagePath: props.news.imagePath,
+  name: "",
+  description: "",
+  imagePath: "",
 });
 
 function storeParam() {
-  //   form.put("/stem/news/" + props.news.id);
-
-  Inertia.post(`/stem/news/${props.news.id}`, {
-    _method: "put",
-    title: form.title,
-    description: form.description,
-    imagePath: form.imagePath,
-  });
+  form.post("/stem/museumItems");
 }
 </script>
         
