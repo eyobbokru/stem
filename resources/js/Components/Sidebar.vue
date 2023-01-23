@@ -89,6 +89,7 @@
             $page.url === '/admin/management' ? activeClass : inactiveClass,
           ]"
           :href="route('admin.management.index')"
+          v-if="$page.props.permission.includes('management list')"
         >
           <img src="/images/school.svg" alt="school" class="w-5 h-5" />
 
@@ -97,8 +98,35 @@
 
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url === '/admin/project' ? activeClass : inactiveClass,
+          ]"
+          :href="route('admin.project.index')"
+          v-if="$page.props.permission.includes('management list')"
+        >
+          <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+          <span class="mx-4">Students Project</span>
+        </Link>
+
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url === 'admin/projectProgress' ? activeClass : inactiveClass,
+          ]"
+          :href="route('admin.projectProgress.index')"
+          v-if="$page.props.permission.includes('management list')"
+        >
+          <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+          <span class="mx-4">Project Progress</span>
+        </Link>
+
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$page.url === '/admin/school' ? activeClass : inactiveClass]"
           :href="route('admin.school.index')"
+          v-if="$page.props.permission.includes('school list')"
         >
           <img src="/images/school.svg" alt="school" class="w-5 h-5" />
 
@@ -113,6 +141,7 @@
               : inactiveClass,
           ]"
           :href="route('admin.gradeStudent.index')"
+          v-if="$page.props.permission.includes('gradeStudent list')"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -138,6 +167,7 @@
               : inactiveClass,
           ]"
           :href="route('admin.academicSession.index')"
+          v-if="$page.props.permission.includes('academicSession list')"
         >
           <img
             src="/images/degre.svg"
@@ -155,6 +185,7 @@
             $page.url.startsWith('/admin/course') ? activeClass : inactiveClass,
           ]"
           :href="route('admin.course.index')"
+          v-if="$page.props.permission.includes('course list')"
         >
           <img
             src="/images/course.svg"
@@ -174,6 +205,7 @@
               : inactiveClass,
           ]"
           :href="route('admin.teacher.index')"
+          v-if="$page.props.permission.includes('teacher list')"
         >
           <img
             src="/images/teacher.svg"
@@ -190,6 +222,7 @@
             $page.url.startsWith('/admin/lab') ? activeClass : inactiveClass,
           ]"
           :href="route('admin.lab.index')"
+          v-if="$page.props.permission.includes('lab list')"
         >
           <img
             src="/images/lab.svg"
@@ -208,6 +241,7 @@
               : inactiveClass,
           ]"
           :href="route('admin.student.index')"
+          v-if="$page.props.permission.includes('student list')"
         >
           <img
             src="/images/student.svg"
@@ -226,6 +260,7 @@
               : inactiveClass,
           ]"
           :href="route('admin.certificates.index')"
+          v-if="$page.props.permission.includes('certificate list')"
         >
           <img
             src="/images/student.svg"
@@ -261,6 +296,7 @@
               : inactiveClass,
           ]"
           :href="route('admin.permission.index')"
+          v-if="$page.props.permission.includes('permission list')"
         >
           <img
             src="/images/student.svg"
@@ -278,6 +314,7 @@
             $page.url.startsWith('/stem/museum') ? activeClass : inactiveClass,
           ]"
           :href="route('stem.museum.index')"
+          v-if="$page.props.permission.includes('museum list')"
         >
           <!-- v-if="$page.props.permission.includes('museum list')" -->
           <img
@@ -296,6 +333,7 @@
             $page.url.startsWith('/stem/news') ? activeClass : inactiveClass,
           ]"
           :href="route('stem.news.index')"
+          v-if="$page.props.permission.includes('news list')"
         >
           <!-- v-if="$page.props.permission.includes('museum list')" -->
           <img

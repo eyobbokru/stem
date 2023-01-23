@@ -42,7 +42,8 @@ class StudentController extends Controller
 
                 ->paginate($perPage)
                 ->withQueryString(),
-            'filters' => Request::only(['search', 'perPage'])
+            'filters' => Request::only(['search', 'perPage']),
+
         ]);
     }
 
@@ -55,7 +56,7 @@ class StudentController extends Controller
     {
         $school = School::all();
         $grade = GradeStudent::all();
-        $academic_sessions = AcademicSession::with('section')->orderBy('created_at', 'desc')->get();
+        $academic_sessions = AcademicSession::with('section')->where('active', 1)->get();
 
         return Inertia::render('Admin/Student/Create', [
             'schools' => $school,

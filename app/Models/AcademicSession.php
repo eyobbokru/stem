@@ -14,7 +14,8 @@ class AcademicSession extends Model
         'academicYear',
         'startingDate',
         'endingDate',
-        'type'
+        'type',
+        'active'
 
 
     ];

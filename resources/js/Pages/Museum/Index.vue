@@ -113,10 +113,7 @@
                     <td class="px-4 py-3 border">{{ museum.from }}</td>
 
                     <td class="px-4 py-3 text-sm border">
-                      <div
-                        class="flex justify-around"
-                        v-if="can.edit || can.delete || can.show"
-                      >
+                      <div class="flex justify-around">
                         <Link
                           :href="route('stem.museum.show', museum.id)"
                           class="

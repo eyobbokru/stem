@@ -1,9 +1,7 @@
 <template>
   <DashboardLayout title="Dashboard">
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Academic Session
-      </h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">project</h2>
     </template>
 
     <div class="py-2">
@@ -11,7 +9,7 @@
         <section class="container mx-auto p-6 font-mono">
           <div class="w-full flex mb-4 p-2 justify-end">
             <Link
-              :href="route('admin.academicSession.create')"
+              :href="route('admin.project.create')"
               class="
                 px-4
                 py-2
@@ -21,7 +19,7 @@
                 rounded-lg
               "
             >
-              Create Academic Session
+              Create project
             </Link>
           </div>
 
@@ -48,7 +46,7 @@
                     <input
                       v-model="search"
                       type="text"
-                      placeholder="Search by name"
+                      placeholder="Search by project name"
                       class="
                         px-8
                         py-3
@@ -100,6 +98,7 @@
                       border-b border-gray-600
                     "
                   >
+                    <th class="px-4 py-3">ID</th>
                     <th class="px-4 py-3">Name</th>
 
                     <th class="px-4 py-3">Manage</th>
@@ -107,24 +106,30 @@
                 </thead>
                 <tbody class="bg-white">
                   <tr
-                    v-for="academicSession in academicSessions.data"
-                    :key="academicSession.id"
+                    v-for="project in projects.data"
+                    :key="project.id"
                     class="text-gray-700"
                   >
-                    <td class="px-4 py-3 border">
-                      {{ academicSession.name }}
-                    </td>
+                    <td class="px-4 py-3 border">{{ project.id }}</td>
+                    <td class="px-4 py-3 border">{{ project.name }}</td>
 
                     <td class="px-4 py-3 text-sm border">
                       <div class="flex justify-around">
-                        <div class="flex justify-center"></div>
                         <Link
-                          :href="
-                            route(
-                              'admin.academicSession.edit',
-                              academicSession.id
-                            )
+                          :href="route('admin.project.show', project.id)"
+                          class="
+                            bg-green-500
+                            hover:bg-green-700
+                            text-white
+                            px-4
+                            py-2
+                            rounded-lg
                           "
+                        >
+                          Show
+                        </Link>
+                        <Link
+                          :href="route('admin.project.edit', project.id)"
                           class="
                             bg-green-500
                             hover:bg-green-700
@@ -137,12 +142,7 @@
                           Edit
                         </Link>
                         <Link
-                          :href="
-                            route(
-                              'admin.academicSession.destroy',
-                              academicSession.id
-                            )
-                          "
+                          :href="route('admin.project.destroy', project.id)"
                           method="delete"
                           as="button"
                           type="button"
@@ -163,7 +163,7 @@
                 </tbody>
               </table>
               <div class="m-2 p-2">
-                <Pagination :links="academicSessions.links" />
+                <Pagination :links="projects.links" />
               </div>
             </div>
           </div>
@@ -172,30 +172,26 @@
     </div>
   </DashboardLayout>
 </template>
-
-<script setup>
+  
+  <script setup>
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
-
-import { Link, useForm } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 import Pagination from "@/Components/Pagination.vue";
 import { ref, watch, defineProps } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps({
-  academicSessions: Object,
+  projects: Object,
+  students: Object,
   filters: Object,
 });
 
 const search = ref("");
 const perPage = ref(5);
 
-const form = useForm({
-  id: "",
-});
-
 watch(search, (value) => {
   Inertia.get(
-    "/admin/academicSession",
+    "/admin/project",
     { search: value, perPage: perPage.value },
     {
       preserveState: true,
@@ -206,7 +202,7 @@ watch(search, (value) => {
 
 function getTags() {
   Inertia.get(
-    "/admin/academicSession",
+    "/admin/project",
     { perPage: perPage.value, search: search.value },
     {
       preserveState: true,
@@ -215,6 +211,7 @@ function getTags() {
   );
 }
 </script>
-
-<style>
+  
+  <style>
 </style>
+  

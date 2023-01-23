@@ -60,6 +60,7 @@ class AcademicSessionController extends Controller
      */
     public function store(StoreAcademicSessionRequest $request)
     {
+        AcademicSession::where('active', '=', 1)->update(['active' => 0]);
 
         $academicSession =  AcademicSession::create([
             'name' => Request::input('name'),
@@ -67,6 +68,7 @@ class AcademicSessionController extends Controller
             'startingDate' =>  Carbon::parse(Request::input('startingDate')),
             'endingDate' =>  Carbon::parse(Request::input('endingDate')),
             'type' => Request::input('type')["name"],
+            'active' => 1,
         ]);
 
         for ($i = 0; $i < (int)Request::input('group'); $i++) {
@@ -129,13 +131,17 @@ class AcademicSessionController extends Controller
     {
 
         // dd($request);
+        if (Request::input('active')) {
+            AcademicSession::where('active', '=', 1)->update(['active' => 0]); // make sure only active academic session is current one
+        }
         //TODO type have problem change to appropriate format
         $academicSession->update([
             'name' => Request::input('name'),
             'academicYear' => Request::input('academicYear'),
+            'active' => Request::input('active'),
             'startingDate' =>  Carbon::parse(Request::input('startingDate')),
             'endingDate' =>  Carbon::parse(Request::input('endingDate')),
-            'type' => Request::input('type')["name"],
+            'type' => Request::input('type')["name"] ? Request::input('type')["name"] : Request::input('type'),
         ]);
         //TODO academic session update
         // change in the update
@@ -157,35 +163,7 @@ class AcademicSessionController extends Controller
         }
 
 
-        // foreach (Request::input('selectCourse') as $toUPdateCourse) {
 
-        //     foreach ($courses as $dbCourses) {
-        //         if ($toUPdateCourse->id == $dbCourses->id) {
-        //             continue;
-        //         } else {
-        //             AcademicSessionCourse::create([
-        //                 'academic_session_id' => $academicSession->id,
-        //                 'course_id' => $toUPdateCourse['id'],
-        //             ]);
-        //         }
-        //     }
-
-        //     AcademicSessionCourse::create([
-        //         'academic_session_id' => $academicSession->id,
-        //         'course_id' => $toUPdateCourse['id'],
-        //     ]);
-        // }
-
-        // foreach (Request::input('selectCourse') as $toUPdateCourse) {
-
-        //     foreach ($courses as $dbCourses) {
-        //         if ($toUPdateCourse->id == $dbCourses->id) {
-        //             continue;
-        //         } else {
-        //             AcademicSessionCourse::destroy($dbCourses->id);
-        //         }
-        //     }
-        // }
 
         return Redirect::route('admin.academicSession.index')->with('flash.banner', 'Academic Session Updated successfully');
     }

@@ -14,13 +14,13 @@ use App\Http\Requests\UpdateMuseumRequest;
 class MuseumController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('can:museum list', ['only' => ['index', 'show']]);
-    //     $this->middleware('can:museum create', ['only' => ['create', 'store']]);
-    //     $this->middleware('can:museum edit', ['only' => ['edit', 'update']]);
-    //     $this->middleware('can:museum delete', ['only' => ['destroy']]);
-    // }
+    public function __construct()
+    {
+        $this->middleware('can:museum list', ['only' => ['index', 'show']]);
+        $this->middleware('can:museum create', ['only' => ['create', 'store']]);
+        $this->middleware('can:museum edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:museum delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

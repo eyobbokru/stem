@@ -40,7 +40,7 @@ defineProps({
                 navbar navbar-expand-lg
               "
             >
-              <a class="navbar-brand mr-5" href="index.html">
+              <a class="navbar-brand mr-5" href="/">
                 <!-- <img src="assets/images/logo.svg" alt="Logo" /> -->
                 <h3>STEM</h3>
               </a>
@@ -95,11 +95,7 @@ defineProps({
                   <li class="nav-item ml-5 lg:ml-11">
                     <a class="page-scroll active" href="#home">Home</a>
                   </li>
-                  <li class="nav-item ml-5 lg:ml-11">
-                    <a class="page-scroll" :href="route('museum')"
-                      >AASTU Museum</a
-                    >
-                  </li>
+
                   <li class="nav-item ml-5 lg:ml-11">
                     <a class="page-scroll" href="#blog">New and Announcement</a>
                   </li>

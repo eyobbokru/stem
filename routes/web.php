@@ -26,6 +26,9 @@ use App\Http\Controllers\Admin\GradeReportController;
 use App\Http\Controllers\Admin\PdfGenerateController;
 use App\Http\Controllers\Admin\GradeStudentController;
 use App\Http\Controllers\Admin\AcademicSessionController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\ProjectProgressController;
+use App\Models\ProjectProgress;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +81,8 @@ Route::middleware([
 
     Route::resource('/role', RoleController::class);
     Route::resource('/permission', PermissionController::class);
+    Route::resource('/project', ProjectController::class);
+    Route::resource('/projectProgress', ProjectProgressController::class);
 
     Route::get('/attendance', [PdfGenerateController::class, 'attendance'])->name('attendance');
     Route::get('/grades', [GradeController::class, 'grade'])->name('grades');
