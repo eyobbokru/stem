@@ -1,12 +1,23 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import Pagination from "@/Components/Pagination.vue";
 
 defineProps({
   canLogin: Boolean,
   canRegister: Boolean,
   laravelVersion: String,
   phpVersion: String,
+  allNews: Object,
 });
+
+function formatDateDay(date) {
+  const options = {
+    day: "numeric",
+    year: "numeric",
+    month: "long",
+  };
+  return new Date(date).toLocaleDateString("en-us", options);
+}
 </script>
 
 
@@ -241,7 +252,11 @@ defineProps({
       </div>
       <!-- row -->
       <div class="row justify-center lg:justify-start">
-        <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12">
+        <div
+          class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12"
+          v-for="(news, index) in allNews.data"
+          :key="index"
+        >
           <div
             class="
               single_blog
@@ -256,104 +271,40 @@ defineProps({
             "
           >
             <div class="blog_image">
-              <img src="assets/images/blog-1.jpg" alt="blog" class="w-full" />
+              <img
+                :src="'/public/Image/' + news.imagePath"
+                alt="blog"
+                class="w-full h-[350px]"
+              />
             </div>
             <div class="blog_content p-4 md:p-5">
               <ul class="blog_meta flex justify-between">
                 <li class="text-body-color text-sm md:text-base">
                   By:
-                  <a href="#" class="text-body-color hover:text-theme-color"
-                    >Musharof Chowdury</a
-                  >
+                  <a
+                    href="#"
+                    class="text-body-color hover:text-theme-color"
+                  ></a>
                 </li>
                 <li class="text-body-color text-sm md:text-base">
-                  15 June 2024
+                  {{ formatDateDay(news.created_at) }}
                 </li>
               </ul>
               <h3 class="blog_title">
-                <a href="#">How to track your business revenue</a>
+                <a href="#">{{ news.title }}</a>
               </h3>
-              <a href="#" class="more_btn">Read More</a>
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12">
-          <div
-            class="
-              single_blog
-              mx-3
-              mt-8
-              rounded-xl
-              bg-white
-              transition-all
-              duration-300
-              overflow-hidden
-              hover:shadow-lg
-            "
-          >
-            <div class="blog_image">
-              <img src="assets/images/blog-2.jpg" alt="blog" class="w-full" />
-            </div>
-            <div class="blog_content p-4 md:p-5">
-              <ul class="blog_meta flex justify-between">
-                <li class="text-body-color text-sm md:text-base">
-                  By:
-                  <a href="#" class="text-body-color hover:text-theme-color"
-                    >Musharof Chowdury</a
-                  >
-                </li>
-                <li class="text-body-color text-sm md:text-base">
-                  15 June 2024
-                </li>
-              </ul>
-              <h3 class="blog_title">
-                <a href="#">Improving products depending on feedback</a>
-              </h3>
-              <a href="#" class="more_btn">Read More</a>
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12">
-          <div
-            class="
-              single_blog
-              mx-3
-              mt-8
-              rounded-xl
-              bg-white
-              transition-all
-              duration-300
-              overflow-hidden
-              hover:shadow-lg
-            "
-          >
-            <div class="blog_image">
-              <img src="assets/images/blog-3.jpg" alt="blog" class="w-full" />
-            </div>
-            <div class="blog_content p-4 md:p-5">
-              <ul class="blog_meta flex justify-between">
-                <li class="text-body-color text-sm md:text-base">
-                  By:
-                  <a href="#" class="text-body-color hover:text-theme-color"
-                    >Musharof Chowdury</a
-                  >
-                </li>
-                <li class="text-body-color text-sm md:text-base">
-                  15 June 2024
-                </li>
-              </ul>
-              <h3 class="blog_title">
-                <a href="#">How to diversify your audience</a>
-              </h3>
-              <a href="#" class="more_btn">Read More</a>
+              <a :href="route('stem.news.show', news.id)" class="more_btn"
+                >Read More</a
+              >
             </div>
           </div>
           <!-- row -->
         </div>
       </div>
       <!-- row -->
+      <div class="m-2 p-2">
+        <Pagination :links="allNews.links" />
+      </div>
     </div>
     <!-- container -->
   </section>

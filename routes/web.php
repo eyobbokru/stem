@@ -1,24 +1,28 @@
 <?php
 
 
+use App\Models\News;
 use Inertia\Inertia;
 use App\Models\GradeStudent;
-use App\Models\AcademicSession;
 
+use App\Models\AcademicSession;
+use App\Models\ProjectProgress;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\LabController;
-
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\MuseumItemsController;
 use App\Http\Controllers\Admin\CourseController;
-use App\Http\Controllers\Admin\SchoolController;
-use App\Http\Controllers\Admin\StudentController;
 
+use App\Http\Controllers\Admin\SchoolController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Museum\MuseumController;
+use App\Http\Controllers\ProjectProgressController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\CertificateController;
@@ -26,9 +30,6 @@ use App\Http\Controllers\Admin\GradeReportController;
 use App\Http\Controllers\Admin\PdfGenerateController;
 use App\Http\Controllers\Admin\GradeStudentController;
 use App\Http\Controllers\Admin\AcademicSessionController;
-use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\ProjectProgressController;
-use App\Models\ProjectProgress;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,11 +43,15 @@ use App\Models\ProjectProgress;
 */
 
 Route::get('/', function () {
+
+    $news = News::latest()->paginate(3);
+    // dd($news);
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'allNews' => $news,
     ]);
 });
 
