@@ -294,7 +294,7 @@ function formatDateDay(date) {
                 <a href="#">{{ news.title }}</a>
               </h3>
               <a :href="route('stem.news.show', news.id)" class="more_btn"
-                >Read More</a
+                >Read More ...</a
               >
             </div>
           </div>
