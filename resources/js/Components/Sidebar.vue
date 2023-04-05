@@ -4,33 +4,13 @@
     <div
       :class="isOpen ? 'block' : 'hidden'"
       @click="isOpen = false"
-      class="
-        fixed
-        inset-0
-        z-20
-        transition-opacity
-        bg-black
-        opacity-50
-        lg:hidden
-      "
+      class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"
     ></div>
     <!-- End Backdrop -->
 
     <div
       :class="isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-      class="
-        fixed
-        inset-y-0
-        left-0
-        z-30
-        w-64
-        overflow-y-auto
-        transition
-        duration-300
-        transform
-        bg-gray-900
-        lg:translate-x-0 lg:static lg:inset-0
-      "
+      class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0"
     >
       <div class="flex items-center justify-center mt-8">
         <div class="flex items-center">
@@ -96,30 +76,229 @@
           <span class="mx-4">Management</span>
         </Link>
 
+        <li class="relative m-0 x-[0.2rem]">
+          <a
+            type="button"
+            class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+            @click="toggleSubMenu1"
+          >
+            <span
+              class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="h-4 w-4"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm2.023 6.828a.75.75 0 10-1.06-1.06 3.75 3.75 0 01-5.304 0 .75.75 0 00-1.06 1.06 5.25 5.25 0 007.424 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+            <span>Calender</span>
+            <span
+              class="absolute right-0 ml-auto mr-[0.8rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-gray-600 dark:[&>svg]:text-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="h-5 w-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </a>
+          <ul class="relative m-0 p-0" v-show="showSubMenu1">
+            <li class="relative">
+              <Link
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url.startsWith('/admin/academicSession')
+                    ? activeClass
+                    : inactiveClass,
+                ]"
+                :href="route('admin.academicSession.index')"
+                v-if="$page.props.permission.includes('academicSession list')"
+              >
+                <img
+                  src="/images/degre.svg"
+                  alt="degree"
+                  class="w-5 h-5"
+                  fill="currentColor"
+                />
+
+                <span class="mx-4">Academic Session</span>
+              </Link>
+            </li>
+
+            <li class="relative">
+              <a
+                class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+                >Link 3</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li class="relative m-0 x-[0.2rem]">
+          <a
+            type="button"
+            class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+            @click="toggleSubMenu2"
+          >
+            <span
+              class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="h-4 w-4"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm2.023 6.828a.75.75 0 10-1.06-1.06 3.75 3.75 0 01-5.304 0 .75.75 0 00-1.06 1.06 5.25 5.25 0 007.424 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+            <span>Student Related</span>
+            <span
+              class="absolute right-0 ml-auto mr-[0.8rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-gray-600 dark:[&>svg]:text-gray-300"
+              data-te-sidenav-rotate-icon-ref
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="h-5 w-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </a>
+          <ul class="relative m-0 p-0" v-show="showSubMenu2">
+            <li class="relative">
+              <Link
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url.startsWith('/admin/student')
+                    ? activeClass
+                    : inactiveClass,
+                ]"
+                :href="route('admin.student.index')"
+                v-if="$page.props.permission.includes('student list')"
+              >
+                <img
+                  src="/images/student.svg"
+                  alt="lab"
+                  class="w-5 h-5"
+                  fill="currentColor"
+                />
+
+                <span class="mx-4">Student</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url === '/admin/project' ? activeClass : inactiveClass,
+                ]"
+                :href="route('admin.project.index')"
+                v-if="$page.props.permission.includes('management list')"
+              >
+                <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+                <span class="mx-4">Students Project</span>
+              </Link>
+            </li>
+            <li class="relative">
+              <Link
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url === 'admin/projectProgress'
+                    ? activeClass
+                    : inactiveClass,
+                ]"
+                :href="route('admin.projectProgress.index')"
+                v-if="$page.props.permission.includes('management list')"
+              >
+                <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+                <span class="mx-4">Project Progress</span>
+              </Link>
+            </li>
+          </ul>
+        </li>
+
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[
-            $page.url === '/admin/project' ? activeClass : inactiveClass,
+            $page.url.startsWith('/admin/teacher')
+              ? activeClass
+              : inactiveClass,
           ]"
-          :href="route('admin.project.index')"
-          v-if="$page.props.permission.includes('management list')"
+          :href="route('admin.teacher.index')"
+          v-if="$page.props.permission.includes('teacher list')"
         >
-          <img src="/images/school.svg" alt="school" class="w-5 h-5" />
-
-          <span class="mx-4">Students Project</span>
+          <img
+            src="/images/teacher.svg"
+            alt="teacher"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+          <span class="mx-4">Teacher</span>
         </Link>
 
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[
-            $page.url === 'admin/projectProgress' ? activeClass : inactiveClass,
+            $page.url.startsWith('/admin/lab') ? activeClass : inactiveClass,
           ]"
-          :href="route('admin.projectProgress.index')"
-          v-if="$page.props.permission.includes('management list')"
+          :href="route('admin.lab.index')"
+          v-if="$page.props.permission.includes('lab list')"
         >
-          <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+          <img
+            src="/images/lab.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
 
-          <span class="mx-4">Project Progress</span>
+          <span class="mx-4">Lab</span>
+        </Link>
+
+        <Link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[
+            $page.url.startsWith('/admin/certificates')
+              ? activeClass
+              : inactiveClass,
+          ]"
+          :href="route('admin.certificates.index')"
+          v-if="$page.props.permission.includes('certificate list')"
+        >
+          <img
+            src="/images/student.svg"
+            alt="lab"
+            class="w-5 h-5"
+            fill="currentColor"
+          />
+
+          <span class="mx-4">Certificate</span>
         </Link>
 
         <Link
@@ -159,118 +338,7 @@
 
           <span class="mx-4">Grade</span>
         </Link>
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[
-            $page.url.startsWith('/admin/academicSession')
-              ? activeClass
-              : inactiveClass,
-          ]"
-          :href="route('admin.academicSession.index')"
-          v-if="$page.props.permission.includes('academicSession list')"
-        >
-          <img
-            src="/images/degre.svg"
-            alt="degree"
-            class="w-5 h-5"
-            fill="currentColor"
-          />
 
-          <span class="mx-4">Academic Session</span>
-        </Link>
-
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[
-            $page.url.startsWith('/admin/course') ? activeClass : inactiveClass,
-          ]"
-          :href="route('admin.course.index')"
-          v-if="$page.props.permission.includes('course list')"
-        >
-          <img
-            src="/images/course.svg"
-            alt="course"
-            class="w-5 h-5"
-            fill="currentColor"
-          />
-
-          <span class="mx-4">Courses</span>
-        </Link>
-
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[
-            $page.url.startsWith('/admin/teacher')
-              ? activeClass
-              : inactiveClass,
-          ]"
-          :href="route('admin.teacher.index')"
-          v-if="$page.props.permission.includes('teacher list')"
-        >
-          <img
-            src="/images/teacher.svg"
-            alt="teacher"
-            class="w-5 h-5"
-            fill="currentColor"
-          />
-          <span class="mx-4">Teacher</span>
-        </Link>
-
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[
-            $page.url.startsWith('/admin/lab') ? activeClass : inactiveClass,
-          ]"
-          :href="route('admin.lab.index')"
-          v-if="$page.props.permission.includes('lab list')"
-        >
-          <img
-            src="/images/lab.svg"
-            alt="lab"
-            class="w-5 h-5"
-            fill="currentColor"
-          />
-
-          <span class="mx-4">Lab</span>
-        </Link>
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[
-            $page.url.startsWith('/admin/student')
-              ? activeClass
-              : inactiveClass,
-          ]"
-          :href="route('admin.student.index')"
-          v-if="$page.props.permission.includes('student list')"
-        >
-          <img
-            src="/images/student.svg"
-            alt="lab"
-            class="w-5 h-5"
-            fill="currentColor"
-          />
-
-          <span class="mx-4">Student</span>
-        </Link>
-        <Link
-          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[
-            $page.url.startsWith('/admin/certificates')
-              ? activeClass
-              : inactiveClass,
-          ]"
-          :href="route('admin.certificates.index')"
-          v-if="$page.props.permission.includes('certificate list')"
-        >
-          <img
-            src="/images/student.svg"
-            alt="lab"
-            class="w-5 h-5"
-            fill="currentColor"
-          />
-
-          <span class="mx-4">Certificate</span>
-        </Link>
         <Link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[
@@ -345,133 +413,6 @@
 
           <span class="mx-4">News</span>
         </Link>
-
-        <div class="">
-          <div>
-            <div class="dropdown relative">
-              <a
-                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-                :class="[
-                  $page.url.startsWith('/admin/student')
-                    ? activeClass
-                    : inactiveClass,
-                ]"
-                href="#"
-                type="button"
-                id="dropdownMenuButton2"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Student Management
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  data-prefix="fas"
-                  data-icon="caret-down"
-                  class="w-4 ml-4"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 320 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                  ></path>
-                </svg>
-              </a>
-              <ul
-                class="
-                  dropdown-menu
-                  min-w-max
-                  absolute
-                  hidden
-                  bg-gray-800
-                  text-base
-                  z-50
-                  float-left
-                  py-2
-                  list-none
-                  text-left
-                  rounded-lg
-                  shadow-lg
-                  mt-1
-                  hidden
-                  m-0
-                  bg-clip-padding
-                  border-none
-                "
-                aria-labelledby="dropdownMenuButton2"
-              >
-                <li>
-                  <Link
-                    class="
-                      flex
-                      items-center
-                      px-6
-                      py-2
-                      mt-4
-                      duration-200
-                      border-l-4
-                    "
-                    :class="[
-                      $page.url.startsWith('/admin/student')
-                        ? activeClass
-                        : inactiveClass,
-                    ]"
-                    :href="route('admin.student.index')"
-                  >
-                    <img
-                      src="/images/student.svg"
-                      alt="lab"
-                      class="w-5 h-5"
-                      fill="currentColor"
-                    />
-
-                    <span class="mx-4">Student</span>
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    class="
-                      dropdown-item
-                      text-sm
-                      py-2
-                      px-4
-                      font-normal
-                      block
-                      w-full
-                      whitespace-nowrap
-                      bg-transparent
-                      text-gray-700
-                      hover:bg-gray-100
-                    "
-                    href="#"
-                    >Another action</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="
-                      dropdown-item
-                      text-sm
-                      py-2
-                      px-4
-                      font-normal
-                      block
-                      w-full
-                      whitespace-nowrap
-                      bg-transparent
-                      text-gray-700
-                      hover:bg-gray-100
-                    "
-                    href="#"
-                    >Something else here</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </nav>
     </div>
   </div>
@@ -481,6 +422,16 @@
 import { ref } from "vue";
 import { useSidebar } from "../hooks/useSidebar";
 import { Link } from "@inertiajs/inertia-vue3";
+
+const showSubMenu1 = ref(false);
+const showSubMenu2 = ref(false);
+
+function toggleSubMenu1() {
+  showSubMenu1.value = !showSubMenu1.value;
+}
+function toggleSubMenu2() {
+  showSubMenu2.value = !showSubMenu2.value;
+}
 
 const { isOpen } = useSidebar();
 const activeClass = ref(

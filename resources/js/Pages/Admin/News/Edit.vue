@@ -12,29 +12,14 @@
           <div class="w-full flex mb-4 p-2">
             <Link
               :href="route('stem.news.index')"
-              class="
-                bg-green-500
-                hover:bg-green-700
-                text-white
-                px-4
-                py-2
-                rounded-lg
-              "
+              class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
             >
               Back
             </Link>
           </div>
 
           <div
-            class="
-              w-full
-              mb-8
-              p-6
-              overflow-hidden
-              bg-white
-              rounded-lg
-              shadow-lg
-            "
+            class="w-full mb-8 p-6 overflow-hidden bg-white rounded-lg shadow-lg"
           >
             <form @submit.prevent="storeParam">
               <div>

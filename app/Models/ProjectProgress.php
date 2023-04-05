@@ -10,4 +10,6 @@ class ProjectProgress extends Model
     use HasFactory;
 
     protected $fillable = ['project_id', 'progressReport', 'image_video'];
+
+    
 }

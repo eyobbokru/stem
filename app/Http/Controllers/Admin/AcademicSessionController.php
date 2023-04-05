@@ -111,9 +111,11 @@ class AcademicSessionController extends Controller
      */
     public function edit(AcademicSession $academicSession)
     {
+        // dd("hello");
         $course = Course::all();
         $academicSessions = AcademicSession::where('id', $academicSession->id)->with('courses')->first();
 
+ 
         return Inertia::render('Admin/AcademicSession/Edit', [
             'academicSession' => $academicSessions,
             'courses' => $course,

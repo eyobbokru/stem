@@ -27,6 +27,7 @@
         "flowbite": "^1.5.3",
         "primeicons": "^5.0.0",
         "primevue": "^3.16.2",
-        "tw-elements": "^1.0.0-alpha12"
+        "tw-elements": "^1.0.0-alpha12",
+        "vue-multiselect": "^2.1.7"
     }
 }

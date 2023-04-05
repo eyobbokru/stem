@@ -12,29 +12,14 @@
           <div class="w-full flex mb-4 p-2">
             <Link
               :href="route('admin.academicSession.index')"
-              class="
-                bg-green-500
-                hover:bg-green-700
-                text-white
-                px-4
-                py-2
-                rounded-lg
-              "
+              class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
             >
               Back
             </Link>
           </div>
 
           <div
-            class="
-              w-full
-              mb-8
-              p-6
-              overflow-hidden
-              bg-white
-              rounded-lg
-              shadow-lg
-            "
+            class="w-full mb-8 p-6 overflow-hidden bg-white rounded-lg shadow-lg"
           >
             <form @submit.prevent="storeParam">
               <div>
@@ -45,20 +30,7 @@
                     >Activate</label
                   >
                   <input
-                    class="
-                      form-check-input
-                      appearance-none
-                      w-9
-                      -ml-10
-                      rounded-full
-                      float-left
-                      h-5
-                      align-top
-                      bg-white bg-no-repeat bg-contain bg-green-300
-                      focus:outline-none
-                      cursor-pointer
-                      shadow-sm
-                    "
+                    class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-green-300 focus:outline-none cursor-pointer shadow-sm"
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckChecked"
@@ -73,7 +45,6 @@
                   type="text"
                   class="mt-1 block w-full"
                   v-model="form.name"
-                  autofocus
                   autocomplete="title"
                   required
                 />
@@ -86,7 +57,6 @@
                   type="text"
                   class="mt-1 block w-full"
                   v-model="form.academicYear"
-                  autofocus
                   autocomplete="title"
                   required
                 />
@@ -170,7 +140,7 @@
 <script setup>
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link, useForm } from "@inertiajs/inertia-vue3";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import JetButton from "@/Jetstream/Button.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetLabel from "@/Jetstream/Label.vue";
