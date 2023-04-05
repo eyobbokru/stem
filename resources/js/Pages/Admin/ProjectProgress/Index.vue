@@ -35,17 +35,7 @@
                       v-model="search"
                       type="text"
                       placeholder="Search by project name"
-                      class="
-                        px-8
-                        py-3
-                        w-full
-                        md:w-2/6
-                        rounded-md
-                        bg-gray-100
-                        border-transparent
-                        focus:border-gray-500 focus:bg-white focus:ring-0
-                        text-sm
-                      "
+                      class="px-8 py-3 w-full md:w-2/6 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                     />
                   </div>
                 </div>
@@ -53,16 +43,7 @@
                   <select
                     v-model="perPage"
                     @change="getTags"
-                    class="
-                      px-4
-                      py-3
-                      w-full
-                      rounded-md
-                      bg-gray-100
-                      border-transparent
-                      focus:border-gray-500 focus:bg-white focus:ring-0
-                      text-sm
-                    "
+                    class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                   >
                     <option value="5">5 Per Page</option>
                     <option value="10">10 Per Page</option>
@@ -76,15 +57,7 @@
               <table class="w-full">
                 <thead>
                   <tr
-                    class="
-                      text-md
-                      font-semibold
-                      tracking-wide
-                      text-left text-gray-900
-                      bg-gray-100
-                      uppercase
-                      border-b border-gray-600
-                    "
+                    class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600"
                   >
                     <th class="px-4 py-3">ID</th>
                     <th class="px-4 py-3">Name</th>
@@ -107,14 +80,7 @@
                           :href="
                             route('admin.projectProgress.show', project.id)
                           "
-                          class="
-                            bg-green-500
-                            hover:bg-green-700
-                            text-white
-                            px-4
-                            py-2
-                            rounded-lg
-                          "
+                          class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
                         >
                           Show
                         </Link>
@@ -122,14 +88,7 @@
                           :href="
                             route('admin.projectProgress.edit', project.id)
                           "
-                          class="
-                            bg-green-500
-                            hover:bg-green-700
-                            text-white
-                            px-4
-                            py-2
-                            rounded-lg
-                          "
+                          class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
                         >
                           Progress
                         </Link>
@@ -167,7 +126,7 @@ const perPage = ref(5);
 
 watch(search, (value) => {
   Inertia.get(
-    "/admin/project",
+    "/admin/projectProgress",
     { search: value, perPage: perPage.value },
     {
       preserveState: true,
@@ -178,7 +137,7 @@ watch(search, (value) => {
 
 function getTags() {
   Inertia.get(
-    "/admin/project",
+    "/admin/projectProgress",
     { perPage: perPage.value, search: search.value },
     {
       preserveState: true,

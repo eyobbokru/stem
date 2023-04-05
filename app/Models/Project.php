@@ -13,12 +13,14 @@ class Project extends Model
     use HasFactory;
     protected $fillable = ['name', 'description', 'result'];
 
-    protected $with = ['students'];
+    protected $with = ['students','progress'];
+
 
     public function progress()
     {
         return $this->hasMany(ProjectProgress::class, 'project_id', 'id');
     }
+
     public function projectStudents()
     {
         return $this->hasMany(ProjectStudent::class, 'project_id', 'id');
