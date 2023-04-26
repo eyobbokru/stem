@@ -43,13 +43,7 @@ function formatDateDay(date) {
         <div class="row items-center">
           <div class="w-full">
             <nav
-              class="
-                flex
-                items-center
-                justify-between
-                py-4
-                navbar navbar-expand-lg
-              "
+              class="flex items-center justify-between py-4 navbar navbar-expand-lg"
             >
               <a class="navbar-brand mr-5" href="/">
                 <!-- <img src="assets/images/logo.svg" alt="Logo" /> -->
@@ -70,38 +64,12 @@ function formatDateDay(date) {
               </button>
 
               <div
-                class="
-                  absolute
-                  left-0
-                  z-20
-                  hidden
-                  w-full
-                  px-5
-                  py-3
-                  duration-300
-                  bg-white
-                  lg:w-auto
-                  collapse
-                  navbar-collapse
-                  lg:block
-                  top-full
-                  mt-full
-                  lg:static lg:bg-transparent
-                  shadow
-                  lg:shadow-none
-                "
+                class="absolute left-0 z-20 hidden w-full px-5 py-3 duration-300 bg-white lg:w-auto collapse navbar-collapse lg:block top-full mt-full lg:static lg:bg-transparent shadow lg:shadow-none"
                 id="navbarOne"
               >
                 <ul
                   id="nav"
-                  class="
-                    items-center
-                    content-start
-                    mr-auto
-                    lg:justify-end
-                    navbar-nav
-                    lg:flex
-                  "
+                  class="items-center content-start mr-auto lg:justify-end navbar-nav lg:flex"
                 >
                   <li class="nav-item ml-5 lg:ml-11">
                     <a class="page-scroll active" href="#home">Home</a>
@@ -140,15 +108,7 @@ function formatDateDay(date) {
 
     <div
       id="home"
-      class="
-        header_hero
-        bg-gray
-        relative
-        z-10
-        overflow-hidden
-        lg:flex
-        items-center
-      "
+      class="header_hero bg-gray relative z-10 overflow-hidden lg:flex items-center"
     >
       <div class="hero_shape shape_1">
         <img src="assets/images/shape/shape-1.svg" alt="shape" />
@@ -200,15 +160,7 @@ function formatDateDay(date) {
           <div class="w-full lg:w-1/2">
             <div class="header_hero_content pt-150 lg:pt-0">
               <h2
-                class="
-                  hero_title
-                  text-2xl
-                  sm:text-4xl
-                  md:text-5xl
-                  lg:text-4xl
-                  xl:text-5xl
-                  font-extrabold
-                "
+                class="hero_title text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold"
               >
                 AASTU STEM Management
                 <span class="text-theme-color">System</span>
@@ -245,6 +197,7 @@ function formatDateDay(date) {
         <div class="w-full lg:w-1/2">
           <div class="section_title text-center pb-6">
             <h5 class="sub_title">New and Announcement</h5>
+
             <h4 class="main_title">From The News</h4>
           </div>
           <!-- section title -->
@@ -258,17 +211,7 @@ function formatDateDay(date) {
           :key="index"
         >
           <div
-            class="
-              single_blog
-              mx-3
-              mt-8
-              rounded-xl
-              bg-white
-              transition-all
-              duration-300
-              overflow-hidden
-              hover:shadow-lg
-            "
+            class="single_blog mx-3 mt-8 rounded-xl bg-white transition-all duration-300 overflow-hidden hover:shadow-lg"
           >
             <div class="blog_image">
               <img
@@ -293,7 +236,7 @@ function formatDateDay(date) {
               <h3 class="blog_title">
                 <a href="#">{{ news.title }}</a>
               </h3>
-              <a :href="route('stem.news.show', news.id)" class="more_btn"
+              <a :href="route('news.show', news.id)" class="more_btn"
                 >Read More ...</a
               >
             </div>
@@ -316,16 +259,7 @@ function formatDateDay(date) {
       <img src="assets/images/footer-shape-left.png" alt="" />
     </div>
     <div
-      class="
-        shape
-        absolute
-        right-0
-        top-0
-        opacity-5
-        h-full
-        overflow-hidden
-        w-1/3
-      "
+      class="shape absolute right-0 top-0 opacity-5 h-full overflow-hidden w-1/3"
     >
       <img src="assets/images/footer-shape-right.png" alt="" />
     </div>
@@ -404,14 +338,7 @@ function formatDateDay(date) {
       </div>
       <!-- footer widget -->
       <div
-        class="
-          footer_copyright
-          pt-3
-          pb-6
-          border-t-2 border-solid border-white border-opacity-10
-          sm:flex
-          justify-between
-        "
+        class="footer_copyright pt-3 pb-6 border-t-2 border-solid border-white border-opacity-10 sm:flex justify-between"
       >
         <div class="footer_social pt-4 mx-3 text-center">
           <ul class="social flex justify-center sm:justify-start">
