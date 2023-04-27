@@ -45,7 +45,8 @@ use App\Http\Controllers\Admin\AcademicSessionController;
 |
 */
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/news/{id}', [HomeController::class, 'home'])->name('news.show');
+Route::get('/news/{id}', [HomeController::class, 'news'])->name('news.show');
+Route::get('/calls/{id}', [HomeController::class, 'calls'])->name('calls.show');
 
 // Route::get('/', function () {
 

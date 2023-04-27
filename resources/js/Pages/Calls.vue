@@ -1,16 +1,28 @@
 <script setup>
-import { Head, Link } from "@inertiajs/inertia-vue3";
+// import { Head, Link } from "@inertiajs/inertia-vue3";
 import Pagination from "@/Components/Pagination.vue";
+import { Link, useForm } from "@inertiajs/inertia-vue3";
+import { ref, watch } from "vue";
+import JetButton from "@/Jetstream/Button.vue";
+import JetInput from "@/Jetstream/Input.vue";
+import JetLabel from "@/Jetstream/Label.vue";
+import Calendar from "primevue/calendar";
 
 defineProps({
   canLogin: Boolean,
   canRegister: Boolean,
   laravelVersion: String,
   phpVersion: String,
-  allNews: Object,
-  allCalls: Object,
+  calls: Object,
+});
+const form = useForm({
+  name: "",
+  end_date: "",
 });
 
+function storeParam() {
+  form.post("/admin/calls");
+}
 function formatDateDay(date) {
   const options = {
     day: "numeric",
@@ -43,9 +55,9 @@ function formatDateDay(date) {
   />
 
   <!--====== Tailwind CSS ======-->
-  <link rel="stylesheet" href="/css/tailwindcss.css" />
+  <link rel="stylesheet" href="/bootstrapcss/tailwindcss.css" />
 
-  <section class="header_area">
+  <section class="header_area mt-5 mb-5">
     <div class="navbar-area bg-white">
       <div class="container relative">
         <div class="row items-center">
@@ -55,7 +67,7 @@ function formatDateDay(date) {
             >
               <a class="navbar-brand mr-5" href="/">
                 <!-- <img src="assets/images/logo.svg" alt="Logo" /> -->
-                <h3>STEM</h3>
+                <h1 class="ml-5">STEM</h1>
               </a>
               <button
                 class="block navbar-toggler focus:outline-none lg:hidden"
@@ -80,11 +92,11 @@ function formatDateDay(date) {
                   class="items-center content-start mr-auto lg:justify-end navbar-nav lg:flex"
                 >
                   <li class="nav-item ml-5 lg:ml-11">
-                    <a class="page-scroll active" href="#home">Home</a>
+                    <a class="page-scroll active" href="/">Home</a>
                   </li>
 
                   <li class="nav-item ml-5 lg:ml-11">
-                    <a class="page-scroll" href="#blog">New and Announcement</a>
+                    <a class="page-scroll" href="/">New and Announcement</a>
                   </li>
                   <li class="nav-item ml-5 lg:ml-11">
                     <Link
@@ -114,205 +126,99 @@ function formatDateDay(date) {
     </div>
     <!-- header navbar -->
 
-    <div
-      id="home"
-      class="header_hero bg-gray relative z-10 overflow-hidden lg:flex items-center"
-    >
-      <div class="hero_shape shape_1">
-        <img src="/assets/images/shape/shape-1.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_2">
-        <img src="/assets/images/shape/shape-2.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_3">
-        <img src="/assets/images/shape/shape-3.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_4">
-        <img src="/assets/images/shape/shape-4.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_6">
-        <img src="/assets/images/shape/shape-1.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_7">
-        <img src="/assets/images/shape/shape-4.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_8">
-        <img src="/assets/images/shape/shape-3.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_9">
-        <img src="/assets/images/shape/shape-2.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_10">
-        <img src="/assets/images/shape/shape-4.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_11">
-        <img src="/assets/images/shape/shape-1.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-      <div class="hero_shape shape_12">
-        <img src="/assets/images/shape/shape-2.svg" alt="shape" />
-      </div>
-      <!-- hero shape -->
-
-      <div class="container">
-        <div class="row">
-          <div class="w-full lg:w-1/2">
-            <div class="header_hero_content pt-150 lg:pt-0">
-              <h2
-                class="hero_title text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold"
-              >
-                AASTU STEM Management
-                <span class="text-theme-color">System</span>
-              </h2>
-              <p class="mt-8 lg:mr-8">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna.
-              </p>
-              <div class="hero_btn mt-10">
-                <a class="main-btn" :href="route('login')">Get Started</a>
-              </div>
-            </div>
-            <!-- header hero content -->
-          </div>
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-      <div class="header_shape hidden lg:block"></div>
-
-      <div class="header_image flex items-center">
-        <div class="image 2xl:pl-25">
-          <img src="/assets/images/header-image.svg" alt="Header Image" />
-        </div>
-      </div>
-      <!-- header image -->
-    </div>
     <!-- header hero -->
   </section>
 
-  <section id="blog" class="blog_area pt-120 pb-120">
+  <section class="flex pt-120 pb-120 justify-center mt-2">
     <div class="container">
       <div class="row justify-center">
         <div class="w-full lg:w-1/2">
-          <div class="section_title text-center pb-6">
-            <h5 class="main_title">New and Announcement</h5>
-
-            <h4 class="sub_title">From The News</h4>
-          </div>
+          <div class="section_title text-center pb-6"></div>
           <!-- section title -->
         </div>
       </div>
       <!-- row -->
-      <div class="row justify-center lg:justify-start">
-        <div
-          class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12"
-          v-for="(news, index) in allNews.data"
-          :key="index"
-        >
+      <div class="flex justify-center">
+        <div class="w-full">
           <div
             class="single_blog mx-3 mt-8 rounded-xl bg-white transition-all duration-300 overflow-hidden hover:shadow-lg"
           >
-            <div class="blog_image">
-              <img
-                :src="'/public/Image/' + news.imagePath"
-                alt="blog"
-                class="w-full h-[350px]"
-              />
+            <div class="flex justify-center"></div>
+            <div class="m-5 p-5 font-bold">
+              <span>{{ calls.coe.name }}</span> / <span>{{ calls.name }}</span>
             </div>
-            <div class="blog_content p-4 md:p-5">
-              <ul class="blog_meta flex justify-between">
-                <li class="text-body-color text-sm md:text-base">
-                  <a
-                    :href="route('news.show', news.id)"
-                    class="text-body-color hover:text-theme-color"
-                  ></a>
-                </li>
-                <li class="text-body-color text-sm md:text-base">
-                  {{ formatDateDay(news.created_at) }}
-                </li>
-              </ul>
-              <h3 class="blog_title">
-                <a :href="route('news.show', news.id)">{{ news.title }}</a>
-              </h3>
-              <a :href="route('news.show', news.id)" class="more_btn"
-                >Read More ...</a
-              >
+
+            <div class="py-2">
+              <div class="max-w-7xl mx-auto">
+                <section class="container mx-auto p-6 font-mono">
+                  <div class="w-full flex mb-4 p-2">
+                    <Link
+                      :href="route('home')"
+                      class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                    >
+                      Back
+                    </Link>
+                  </div>
+
+                  <div
+                    class="w-full mb-8 p-6 overflow-hidden bg-white rounded-lg shadow-lg"
+                  >
+                    <form @submit.prevent="storeParam">
+                      <div>
+                        <jet-label for="title" value="Name" />
+                        <jet-input
+                          id="title"
+                          type="text"
+                          class="mt-1 block w-full"
+                          v-model="form.name"
+                          autofocus
+                          autocomplete="title"
+                          required
+                        />
+                        <div
+                          class="text-sm text-red-400"
+                          v-if="form.errors.name"
+                        >
+                          {{ form.errors.name }}
+                        </div>
+
+                        <jet-label for="endingYear" value="Closing Date" />
+                        <Calendar
+                          id="endingYear"
+                          class="mt-1 block w-full"
+                          v-model="form.end_date"
+                          :showIcon="true"
+                        />
+                        <div
+                          class="text-sm text-red-400"
+                          v-if="form.errors.end_date"
+                        >
+                          {{ form.errors.end_date }}
+                        </div>
+
+                        <div class="flex items-center mt-4">
+                          <jet-button
+                            class="ml-4"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                          >
+                            ADD
+                          </jet-button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </section>
+              </div>
             </div>
           </div>
           <!-- row -->
         </div>
       </div>
       <!-- row -->
-      <div class="m-2 p-2">
-        <Pagination :links="allNews.links" />
-      </div>
     </div>
     <!-- container -->
   </section>
-
-  <!-- <section id="blog" class="blog_area pt-120 pb-120">
-    <div class="container">
-      <div class="row justify-center">
-        <div class="w-full lg:w-1/2">
-          <div class="section_title text-center pb-6">
-            <h5 class="main_title">Calls</h5>
-
-            <h4 class="sub_title">From The centers</h4>
-          </div>
-      
-        </div>
-      </div>
-    
-      <div class="row justify-center lg:justify-start">
-        <div
-          class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12"
-          v-for="(calls, index) in allCalls.data"
-          :key="index"
-        >
-          <div
-            class="single_blog mx-3 mt-8 rounded-xl bg-white transition-all duration-300 overflow-hidden hover:shadow-lg"
-          >
-            <div class="blog_image"></div>
-            <div class="blog_content p-4 md:p-5">
-              <h3 class="blog_title">
-                {{ calls.coe.name }}
-                <a :href="route('calls.show', calls.id)">{{ calls.name }}</a>
-              </h3>
-              <a :href="route('calls.show', calls.id)" class="more_btn"
-                >Read More ...</a
-              >
-              <ul class="blog_meta flex justify-between">
-                <li class="text-body-color text-sm md:text-base">
-                  <a
-                    :href="route('calls.show', calls.id)"
-                    class="text-body-color hover:text-theme-color"
-                  ></a>
-                </li>
-                <li class="text-body-color text-sm md:text-base">
-                  {{ formatDateDay(calls.created_at) }}
-                </li>
-              </ul>
-            </div>
-          </div>
-        
-        </div>
-      </div>
- 
-      <div class="m-2 p-2">
-        <Pagination :links="allCalls.links" />
-      </div>
-    </div>
-
-  </section> -->
   <footer id="footer" class="footer_area bg-black relative z-10">
     <div
       class="shape absolute left-0 top-0 opacity-5 h-full overflow-hidden w-1/3"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Call;
 use App\Models\News;
 use Inertia\Inertia;
@@ -14,9 +15,10 @@ class HomeController extends Controller
 {
     public function home()
     {
+        $currentDate = Carbon::now();
 
         $news = News::latest()->paginate(3);
-        $news = Call::latest()->paginate(3);
+        $calls = Call::whereDate('end_date','>', $currentDate)->latest()->paginate(3);
         // dd($news);
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
@@ -24,6 +26,7 @@ class HomeController extends Controller
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
             'allNews' => $news,
+            'allCalls' => $calls,
         ]);
     }
 
@@ -36,13 +39,28 @@ class HomeController extends Controller
     }
 
     // new show 
-    public function news()
+    public function news($id)
     {
+        $news = News::findOrFail($id);
+    
 
-        return Inertia::render('Dashboard');
+        return Inertia::render('News',[
+            'news'=>$news,
+         
+        ]);
 
     }
     //call show 
+    public function calls($id)
+    {
+        $calls = Call::findOrFail($id);
+    
 
+        return Inertia::render('Calls',[
+            'calls'=>$calls,
+         
+        ]);
+
+    }
     // call apply
 }
