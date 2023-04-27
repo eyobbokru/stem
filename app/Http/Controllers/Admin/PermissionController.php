@@ -56,6 +56,7 @@ class PermissionController extends Controller
 
         Permission::create([
             'name' => Request::input('name'),
+            'guard_name'=>'web'
         ]);
 
         return Redirect::route('admin.permission.index')->with('flash.banner', 'Permission Created successfully');

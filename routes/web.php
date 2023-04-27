@@ -10,13 +10,16 @@ use App\Models\ProjectProgress;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\LabController;
+use App\Http\Controllers\Admin\CallController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\MuseumItemsController;
 use App\Http\Controllers\Admin\CourseController;
-
 use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\StudentController;
@@ -41,28 +44,33 @@ use App\Http\Controllers\Admin\AcademicSessionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/news/{id}', [HomeController::class, 'news'])->name('news.show');
+Route::get('/calls/{id}', [HomeController::class, 'calls'])->name('calls.show');
 
-Route::get('/', function () {
+// Route::get('/', function () {
 
-    $news = News::latest()->paginate(3);
-    // dd($news);
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'allNews' => $news,
-    ]);
-});
+//     $news = News::latest()->paginate(3);
+//     // dd($news);
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//         'allNews' => $news,
+//     ]);
+// });
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return Inertia::render('Dashboard');
+    // })->name('dashboard');
 });
 
 
@@ -83,11 +91,14 @@ Route::middleware([
     Route::resource('/gradeReport', GradeReportController::class);
     Route::resource('/grade', GradeController::class);
     Route::resource('/certificates', CertificateController::class);
-
     Route::resource('/role', RoleController::class);
     Route::resource('/permission', PermissionController::class);
     Route::resource('/project', ProjectController::class);
     Route::resource('/projectProgress', ProjectProgressController::class);
+    Route::resource('/users', UserController::class);
+    Route::resource('/calls', CallController::class);
+
+
 
     Route::get('/attendance', [PdfGenerateController::class, 'attendance'])->name('attendance');
     Route::get('/grades', [GradeController::class, 'grade'])->name('grades');
