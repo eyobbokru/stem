@@ -21,14 +21,14 @@
           <div
             class="w-full mb-10 p-6 overflow-hidden bg-white rounded-lg shadow-lg"
           >
-            <form @submit.prevent="storeParam">
+            <form @submit.prevent="storeParam" enctype="multipart/form-data">
               <div>
                 <jet-label for="title" value="Name" />
                 <jet-input
                   id="title"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="project.name"
+                  v-model="incubation.name"
                   autofocus
                   autocomplete="title"
                   required
@@ -64,6 +64,8 @@
                           />
                         </div>
                       </div>
+
+                      <br />
                       <div class="flex items-center mt-4">
                         <jet-button
                           class="ml-4"
@@ -74,8 +76,9 @@
                         </jet-button>
                       </div>
                       <br />
+
                       <template
-                        v-for="(prog, index) in project.progress"
+                        v-for="(prog, index) in incubation.progress"
                         :key="index"
                       >
                         <div class="mb-3">
@@ -122,16 +125,16 @@ import JetInput from "@/Jetstream/Input.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 
 import Textarea from "primevue/textarea";
-import MultiSelect from "primevue/multiselect";
 
 const props = defineProps({
   students: Object,
-  project: Object,
+  incubation: Object,
 });
 
 const form = useForm({
   image_video: "",
   progressReport: "",
+  // stage: props.incubation.stage,
 });
 
 function formatDate(dateString) {
@@ -143,8 +146,9 @@ function storeParam() {
   // form.post("/admin/project");
   // form.put("/admin/projectProgress/" + props.project.id);
 
-  Inertia.post(`/admin/projectProgress/${props.project.id}`, {
+  Inertia.post(`/admin/incProProgress/${props.incubation.id}`, {
     _method: "put",
+    // stage: form.stage,
     image_video: form.image_video,
     progressReport: form.progressReport,
   });

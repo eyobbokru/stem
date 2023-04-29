@@ -33,6 +33,9 @@ use App\Http\Controllers\Admin\GradeReportController;
 use App\Http\Controllers\Admin\PdfGenerateController;
 use App\Http\Controllers\Admin\GradeStudentController;
 use App\Http\Controllers\Admin\AcademicSessionController;
+use App\Http\Controllers\IncubationController;
+use App\Http\Controllers\IncubationProjectProgressController;
+use App\Models\Incubation;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,7 +101,8 @@ Route::middleware([
     Route::resource('/users', UserController::class);
     Route::resource('/calls', CallController::class);
 
-
+    Route::resource('/incubation', IncubationController::class);
+    Route::resource('/incProProgress', IncubationProjectProgressController::class);
 
     Route::get('/attendance', [PdfGenerateController::class, 'attendance'])->name('attendance');
     Route::get('/grades', [GradeController::class, 'grade'])->name('grades');
