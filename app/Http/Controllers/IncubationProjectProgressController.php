@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 use Inertia\Inertia;
+use App\Models\Incubation;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\IncubationProjectProgress;
 use App\Http\Requests\StoreIncubationProjectProgressRequest;
 use App\Http\Requests\UpdateIncubationProjectProgressRequest;
-use App\Models\Incubation;
-use App\Models\IncubationProjectProgress;
 
 class IncubationProjectProgressController extends Controller
 {
@@ -94,7 +95,7 @@ class IncubationProjectProgressController extends Controller
         // dd(Request::all());
         
          $incubation = Incubation::findOrFail($id);
-         $filePath = Null;
+         
  
          $progress = new IncubationProjectProgress();
          $progress->progressReport = Request::input('progressReport');
@@ -103,12 +104,15 @@ class IncubationProjectProgressController extends Controller
  
          // store the file
          if (Request::hasFile('image_video')) {
-             $file = Request::file('image_video');
-             $filename = date('YmdHi') . $file->getClientOriginalName();
-             $file->move(public_path('public/files'), $filename);
- 
-             $progress->image_video = Request::file('image_video')->store('files/' .$filename, 'public');
+            //  $file = Request::file('image_video');
+            //  $filename = date('YmdHi') . $file->getClientOriginalName();
+            //  $file->move(public_path('public/files'), $filename);
 
+            
+ 
+             $progress->image_video = Storage::putFile(
+                'public/progressFiles',
+                Request::file('image_video'));
 
   
          } else {

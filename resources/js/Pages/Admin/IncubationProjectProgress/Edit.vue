@@ -98,7 +98,9 @@
                         </div>
 
                         <div>
-                          <a class="mt-1" href=""
+                          <a
+                            class="mt-1 underline text-blue-600"
+                            :href="'/storage/' + prog.image_video"
                             >File: {{ prog.image_video }}</a
                           >
                         </div>
