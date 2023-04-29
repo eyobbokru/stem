@@ -34,6 +34,32 @@
                   required
                   disabled
                 />
+
+                <jet-label for="ty" value="Project Progress" />
+
+                <select
+                  id="ty"
+                  type="text"
+                  class="mt-1"
+                  v-model="form.isProjectActive"
+                  required
+                >
+                  <option
+                    value="1"
+                    :selected="project.isProjectActive == 1 ? 'true' : 'false'"
+                  >
+                    in Progress
+                  </option>
+                  <option
+                    value="0"
+                    :selected="project.isProjectActive == 0 ? 'true' : 'false'"
+                  >
+                    Complete
+                  </option>
+                </select>
+                <div class="text-sm text-red-400" v-if="form.errors.type">
+                  {{ form.errors.type }}
+                </div>
                 <div class="text-sm text-red-400" v-if="form.errors.name">
                   {{ form.errors.name }}
                 </div>
@@ -134,6 +160,7 @@ const props = defineProps({
 const form = useForm({
   image_video: "",
   progressReport: "",
+  isProjectActive: props.project.isProjectActive,
 });
 
 function formatDate(dateString) {
@@ -147,6 +174,7 @@ function storeParam() {
 
   Inertia.post(`/admin/projectProgress/${props.project.id}`, {
     _method: "put",
+    isProjectActive: form.isProjectActive,
     image_video: form.image_video,
     progressReport: form.progressReport,
   });

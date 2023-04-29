@@ -12,6 +12,8 @@ use App\Models\AcademicSession;
 use App\Models\Group;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Log;
+
 
 class ManagementController extends Controller
 {
@@ -23,6 +25,7 @@ class ManagementController extends Controller
     public function index()
     {
 
+        // dd(intval(Request::input('isProject')));
         //get latest changed to get active
         $academicSession = AcademicSession::with('section')->orderBy('created_at', 'desc')->get();
 
@@ -34,21 +37,28 @@ class ManagementController extends Controller
             ->where('name', 'like', Request::input('group') ?: 'Group-1')->first();
         // dd($group_id ? $group_id->id : 0);
 
-        return Inertia::render('Admin/Management/Index', [
-            'students' => Student::query()
-                ->when(Request::input('search'), function ($query, $search) {
-                    $query->where('name', 'like', "%{$search}%");
-                })
-                ->when(Request::input('academicSession'), function ($query, $academicSession) {
-                    $query->where('academic_session_id', 'like', "%{$academicSession}%");
-                })
-                ->when(Request::input('group'), function ($query) use ($group_id) {
-                    $query->where('group_id', $group_id ? $group_id->id : 0);
-                })
+        $students =  Student::query()
+            ->when(Request::input('search'), function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->when(Request::input('academicSession'), function ($query, $academicSession) {
+                $query->where('academic_session_id', 'like', "%{$academicSession}%");
+            })
+            ->when(Request::input('group'), function ($query) use ($group_id) {
+                $query->where('group_id', $group_id ? $group_id->id : 0);
+            })
+            // ->when(Request::input('isProject'), function ($query,$isProject)  {
+            //     Log::info(intval($isProject));
+            //     $query->where('students.isProject',intval($isProject));
+            // })
+            ->paginate($perPage)
+            ->withQueryString();
 
-                ->paginate($perPage)
-                ->withQueryString(),
-            'filters' => Request::only(['search', 'perPage', 'group', 'academicSession']),
+            // dd($students);
+
+        return Inertia::render('Admin/Management/Index', [
+            'students' =>$students,
+            'filters' => Request::only(['search', 'perPage', 'group', 'academicSession','isProject']),
             'academicSessions' => $academicSession,
 
 

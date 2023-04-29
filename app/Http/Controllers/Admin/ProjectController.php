@@ -77,13 +77,25 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(Request::all());
+        $academic_Session = AcademicSession::where('active', '=', 1)->pluck('id')[0]; // first
 
+        // dd($academic_Session);
         $requestValidated =  Request::validate([
             'name' => 'required',
             'description' => 'required',
+             
         ]);
 
-        $project = Project::create($requestValidated);
+        $project = Project::create(
+            
+            [
+                'name' => Request::input('name') ,
+                'description' => Request::input('description') ,
+                'academic_session_id'=>$academic_Session,
+                'isProjectActive'=>0,
+            ]
+        );
 
         // project students
         foreach (Request::input('studentGroup') as $students) {

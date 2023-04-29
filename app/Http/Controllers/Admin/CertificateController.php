@@ -9,6 +9,7 @@ use App\Models\Student;
 
 use App\Models\AcademicSession;
 use App\Http\Controllers\Controller;
+use App\Models\ProjectStudent;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -23,18 +24,23 @@ class CertificateController extends Controller
     public function index()
     {
 
+
         $academicSession = AcademicSession::with('section')->orderBy('created_at', 'desc')->get();
 
 
         $perPage = Request::input('perPage') ?: 5;
 
         $group_id = 0;
+   
         $group_id = Group::where('academic_session_id', Request::input('academicSession') ?: $academicSession[0]->id)
             ->where('name', 'like', Request::input('group') ?: 'Group-1')->first();
         // dd($group_id ? $group_id->id : 0);
 
         return Inertia::render('Admin/Certificate/Index', [
             'students' => Student::query()
+            ->when(Request::input('isProject'), function ($query,$isProject)  {
+                $query->where('isProject', $isProject);
+            })
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('name', 'like', "%{$search}%");
                 })
@@ -44,7 +50,6 @@ class CertificateController extends Controller
                 ->when(Request::input('group'), function ($query) use ($group_id) {
                     $query->where('group_id', $group_id ? $group_id->id : 0);
                 })
-
                 ->paginate($perPage)
                 ->withQueryString(),
             'filters' => Request::only(['search', 'perPage', 'group', 'academicSession']),
@@ -99,12 +104,30 @@ class CertificateController extends Controller
         // check academic session which 
         // if in get null or zero for result then the return not yet else prepare per academic session and 
         // courses
-        $student =  Student::where('students.id', $id)
+        $students =  Student::where('students.id', $id)
             ->leftJoin('grades', 'grades.student_id', '=', 'students.id')
             // ->Join('courses', 'grades.course_id', 'courses.id')
+             ->select('students.id','isProject','score')
             ->get();
+     
 
-        dd($student);
+        if($students[0]->isProject){
+            //  dd($students[0]);
+
+            // find student project and check it progress
+            $StuProj =ProjectStudent::where('student_id',$students[0]->id)->with('project')->first();
+            if($StuProj->project->isProjectActive){
+            return Redirect::back()->with('flash.banner', 'student didn\'t has incomplete his project')->with('flash.bannerStyle', 'danger');
+
+            }
+        }
+     
+
+        foreach($students as $st){
+            if($st->score == 0 and $st->isProject == 0){
+            return Redirect::back()->with('flash.banner', 'student didn\'t has incomplete grade')->with('flash.bannerStyle', 'danger');
+            }
+        }
 
         $pdf = PDF::loadView('Certificate');
         $pdf->setPaper('a4', 'landscape');

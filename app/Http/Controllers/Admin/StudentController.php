@@ -75,7 +75,7 @@ class StudentController extends Controller
     public function store(StoreStudentRequest $request)
     {
 
-
+// dd(Request::all());
         // $student =  Student::create([
         //     'name' => Request::input('name'),
         //     'fname' => Request::input('fname'),
@@ -98,6 +98,10 @@ class StudentController extends Controller
         //TODO change to queue or observer
         //TODO what if he got promoted 
         // 'score'
+        if(Request::input('isProject')){
+            return Redirect::route('admin.student.index')->with('flash.banner', 'Student Created successfully');
+
+        }
         foreach ($courses as $course) {
             Grade::create([
                 'student_id' => $student->id,
