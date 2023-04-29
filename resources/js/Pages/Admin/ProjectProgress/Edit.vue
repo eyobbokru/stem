@@ -75,7 +75,9 @@
                       </div>
                       <br />
                       <template
-                        v-for="(prog, index) in project.progress"
+                        v-for="(prog, index) in project.progress
+                          .slice()
+                          .reverse()"
                         :key="index"
                       >
                         <div class="mb-3">
