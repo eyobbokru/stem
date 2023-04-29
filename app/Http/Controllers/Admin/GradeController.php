@@ -7,11 +7,12 @@ use App\Models\Grade;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\AcademicSession;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request as Req;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 
 use App\Http\Requests\StoreGradeRequest;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\UpdateGradeRequest;
 
 class GradeController extends Controller
@@ -141,18 +142,30 @@ class GradeController extends Controller
      */
     public function grade(Request $request)
     {
+        // dd(Request::input('academicSession') == null);
         //  dd(Request::input('academicSession'));
 
-        $academicSession1 = AcademicSession::with('section')->orderBy('created_at', 'desc')->get();
+        // check academic session
+        if(Request::input('academicSession') == null){
+            return Redirect::back()->with('flash.banner', 'please select Academic Session')->with('flash.bannerStyle', 'danger');
+            }
+        
+        $academicSession1 = AcademicSession::where('id', Request::input('academicSession'))->with('section')->first();
+
+        if($academicSession1->active == 0){
+            return Redirect::back()->with('flash.banner', 'please select activate Academic Session, this is closed academic session')->with('flash.bannerStyle', 'danger');
+            }
+        
+       // $activeAcademicSession = AcademicSession::where('active', '1')->first();
 
 
         $perPage = Request::input('perPage') ?: 5;
 
         $group_id = 0;
-        $group_id = Group::where('academic_session_id', Request::input('academicSession') ?: $academicSession1[0]->id)
+        $group_id = Group::where('academic_session_id', Request::input('academicSession') ?: $academicSession1->id)
             ->where('name', 'like', Request::input('group') ?: 'Group-1')->first();
 
-        // sorted bay name 
+        // sorted by name 
         $student = Student::query()
             ->leftJoin('grades', 'students.id', '=', 'grades.student_id')
             ->Join('courses', 'grades.course_id', 'courses.id')
@@ -213,6 +226,13 @@ class GradeController extends Controller
                 subject
          }  
         */
+      
+         if(count($student_list) == 0){
+
+            return Redirect::back()->with('flash.banner', 'there is no students register in this session')->with('flash.bannerStyle', 'danger');;
+               
+            }
+   
 
         return Inertia::render('Admin/Grade/Edit', [
             'students' => $students,

@@ -12,14 +12,7 @@
           <div class="w-full flex mb-4 p-2 justify-end">
             <Link
               :href="route('admin.academicSession.create')"
-              class="
-                px-4
-                py-2
-                bg-green-600
-                hover:bg-green-800
-                text-white
-                rounded-lg
-              "
+              class="px-4 py-2 bg-green-600 hover:bg-green-800 text-white rounded-lg"
             >
               Create Academic Session
             </Link>
@@ -49,17 +42,7 @@
                       v-model="search"
                       type="text"
                       placeholder="Search by name"
-                      class="
-                        px-8
-                        py-3
-                        w-full
-                        md:w-2/6
-                        rounded-md
-                        bg-gray-100
-                        border-transparent
-                        focus:border-gray-500 focus:bg-white focus:ring-0
-                        text-sm
-                      "
+                      class="px-8 py-3 w-full md:w-2/6 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                     />
                   </div>
                 </div>
@@ -67,16 +50,7 @@
                   <select
                     v-model="perPage"
                     @change="getTags"
-                    class="
-                      px-4
-                      py-3
-                      w-full
-                      rounded-md
-                      bg-gray-100
-                      border-transparent
-                      focus:border-gray-500 focus:bg-white focus:ring-0
-                      text-sm
-                    "
+                    class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                   >
                     <option value="5">5 Per Page</option>
                     <option value="10">10 Per Page</option>
@@ -90,17 +64,10 @@
               <table class="w-full">
                 <thead>
                   <tr
-                    class="
-                      text-md
-                      font-semibold
-                      tracking-wide
-                      text-left text-gray-900
-                      bg-gray-100
-                      uppercase
-                      border-b border-gray-600
-                    "
+                    class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600"
                   >
                     <th class="px-4 py-3">Name</th>
+                    <th class="px-4 py-3">Set Active Ac</th>
 
                     <th class="px-4 py-3">Manage</th>
                   </tr>
@@ -115,6 +82,25 @@
                       {{ academicSession.name }}
                     </td>
 
+                    <td class="px-4 py-3 border">
+                      <Link
+                        :href="route('admin.setActive', academicSession.id)"
+                      >
+                        <div
+                          v-if="academicSession.active"
+                          class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                        >
+                          Set active
+                        </div>
+                        <div
+                          v-else
+                          class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+                        >
+                          Set active
+                        </div>
+                      </Link>
+                    </td>
+
                     <td class="px-4 py-3 text-sm border">
                       <div class="flex justify-around">
                         <div class="flex justify-center"></div>
@@ -125,14 +111,7 @@
                               academicSession.id
                             )
                           "
-                          class="
-                            bg-green-500
-                            hover:bg-green-700
-                            text-white
-                            px-4
-                            py-2
-                            rounded-lg
-                          "
+                          class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
                         >
                           Edit
                         </Link>
@@ -146,14 +125,7 @@
                           method="delete"
                           as="button"
                           type="button"
-                          class="
-                            bg-red-500
-                            hover:bg-red-700
-                            text-white
-                            px-4
-                            py-2
-                            rounded-lg
-                          "
+                          class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
                         >
                           Delete
                         </Link>

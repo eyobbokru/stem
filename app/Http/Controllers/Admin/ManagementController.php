@@ -23,6 +23,7 @@ class ManagementController extends Controller
     public function index()
     {
 
+        //get latest changed to get active
         $academicSession = AcademicSession::with('section')->orderBy('created_at', 'desc')->get();
 
 

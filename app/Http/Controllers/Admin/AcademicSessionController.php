@@ -25,13 +25,17 @@ class AcademicSessionController extends Controller
      */
     public function index()
     {
+        $currentDate = Carbon::now();
+        // future date past date
+        // $ac =   AcademicSession::whereDate('endingDate', '<', $currentDate)->update(['active' => 0]);
+
         $perPage = Request::input('perPage') ?: 5;
         return Inertia::render('Admin/AcademicSession/Index', [
             'academicSessions' => AcademicSession::query()
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('name', 'like', "%{$search}%");
                 })
-
+                ->latest()
                 ->paginate($perPage)
                 ->withQueryString(),
             'filters' => Request::only(['search', 'perPage'])
@@ -132,10 +136,7 @@ class AcademicSessionController extends Controller
     public function update(UpdateAcademicSessionRequest $request, AcademicSession $academicSession)
     {
 
-        // dd($request);
-        if (Request::input('active')) {
-            AcademicSession::where('active', '=', 1)->update(['active' => 0]); // make sure only active academic session is current one
-        }
+       
         //TODO type have problem change to appropriate format
         $academicSession->update([
             'name' => Request::input('name'),
@@ -180,5 +181,27 @@ class AcademicSessionController extends Controller
     {
         $academicSession->delete();
         return Redirect::route('admin.academicSession.index')->with('flash.banner', 'Academic Session deleted.')->with('flash.bannerStyle', 'danger');
+    }
+
+
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\AcademicSession  $academicSession
+     * @return \Illuminate\Http\Response
+     */
+    public function setActive($id)
+    {
+      //dd($id);
+        // set all deactive
+       // AcademicSession::all()->update(['active' => 1]);
+       AcademicSession::query()->update(['active' => 0]);
+
+        // set active
+      $ac =   AcademicSession::where('id', '=', $id)->update(['active' => 1]); // make sure only active academic session is current one
+    
+
+        return Redirect::back()->with('flash.banner', 'Academic Session activated.')->with('flash.bannerStyle', 'success');
     }
 }

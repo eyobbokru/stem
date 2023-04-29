@@ -106,7 +106,9 @@ Route::middleware([
 
     Route::get('/attendance', [PdfGenerateController::class, 'attendance'])->name('attendance');
     Route::get('/grades', [GradeController::class, 'grade'])->name('grades');
-    // Route::get('/certificates', [CertificateController::class, 'grade'])->name('grades');
+
+    Route::get('/academicSession/setActive/{id}', [AcademicSessionController::class, 'setActive'])->name('setActive');
+
 });
 
 
