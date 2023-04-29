@@ -14,16 +14,7 @@
             <div class="mt-2">
               <div class="mt-2">
                 <div
-                  class="
-                    flex
-                    items-center
-                    px-4
-                    py-4
-                    space-x-4
-                    overflow-x-auto
-                    bg-white
-                    rounded-md
-                  "
+                  class="flex items-center px-4 py-4 space-x-4 overflow-x-auto bg-white rounded-md"
                 >
                   <label>
                     <div class="flex">
@@ -32,16 +23,8 @@
                       >
                       <select
                         v-model="academicSession"
-                        class="
-                          px-4
-                          py-3
-                          w-48
-                          rounded-md
-                          bg-gray-100
-                          border-transparent
-                          focus:border-gray-500 focus:bg-white focus:ring-0
-                          text-sm
-                        "
+                        class="px-4 py-3 w-48 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                        required
                       >
                         <option
                           v-for="(academic_session, index) of academicSessions"
@@ -59,22 +42,16 @@
                       <span class="mr-2 text-gray-700 mt-2">Group</span>
                       <select
                         v-model="group"
-                        class="
-                          px-4
-                          py-3
-                          w-32
-                          rounded-md
-                          bg-gray-100
-                          border-transparent
-                          focus:border-gray-500 focus:bg-white focus:ring-0
-                          text-sm
-                        "
+                        class="px-4 py-3 w-32 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                       >
                         <option selected>Group-1</option>
                         <option>Group-2</option>
                         <option>Group-3</option>
                         <option>Group-4</option>
                         <option>Group-5</option>
+                        <option>Group-6</option>
+                        <option>Group-7</option>
+                        <option>Group-8</option>
                       </select>
                     </div>
                   </label>
@@ -115,44 +92,13 @@
                       v-model="search"
                       type="text"
                       placeholder="Search by name"
-                      class="
-                        px-8
-                        py-3
-                        w-full
-                        md:w-2/6
-                        rounded-md
-                        bg-gray-100
-                        border-transparent
-                        focus:border-gray-500 focus:bg-white focus:ring-0
-                        text-sm
-                      "
+                      class="px-8 py-3 w-full md:w-2/6 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                     />
                   </div>
                 </div>
                 <div class="flex">
                   <a
-                    class="
-                      inline-flex
-                      items-center
-                      px-4
-                      py-2
-                      bg-gray-800
-                      border border-transparent
-                      rounded-md
-                      font-semibold
-                      text-xs text-white
-                      uppercase
-                      tracking-widest
-                      hover:bg-gray-700
-                      active:bg-gray-900
-                      focus:outline-none
-                      focus:border-gray-900
-                      focus:ring
-                      focus:ring-gray-300
-                      disabled:opacity-25
-                      transition
-                      mr-10
-                    "
+                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mr-10"
                     :href="
                       '/admin/attendance?academicSession=' +
                       academicSession +
@@ -169,29 +115,7 @@
                     print Attendance
                   </a>
                   <Link
-                    class="
-                      inline-flex
-                      items-center
-                      px-4
-                      py-2
-                      ml-5
-                      mr-10
-                      bg-gray-800
-                      border border-transparent
-                      rounded-md
-                      font-semibold
-                      text-xs text-white
-                      uppercase
-                      tracking-widest
-                      hover:bg-gray-700
-                      active:bg-gray-900
-                      focus:outline-none
-                      focus:border-gray-900
-                      focus:ring
-                      focus:ring-gray-300
-                      disabled:opacity-25
-                      transition
-                    "
+                    class="inline-flex items-center px-4 py-2 ml-5 mr-10 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
                     :href="route('admin.grades')"
                     :data="{
                       academicSession: academicSession,
@@ -209,15 +133,7 @@
               <table class="w-full">
                 <thead>
                   <tr
-                    class="
-                      text-md
-                      font-semibold
-                      tracking-wide
-                      text-left text-gray-900
-                      bg-gray-100
-                      uppercase
-                      border-b border-gray-600
-                    "
+                    class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600"
                   >
                     <th>NO.</th>
                     <th class="px-4 py-3">Name</th>
