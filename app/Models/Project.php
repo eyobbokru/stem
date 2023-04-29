@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'result'];
+    protected $fillable = ['name', 'description', 'result', 'isProjectActive', 'academic_session_id'];
 
     protected $with = ['students','progress'];
 

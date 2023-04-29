@@ -55,6 +55,18 @@
                       </select>
                     </div>
                   </label>
+
+                  <label>
+                    <div class="flex">
+                      <span class="ml-4 mr-2 text-gray-700 mt-2"
+                        >Project Students</span
+                      >
+                      <Checkbox
+                        class="m-auto h-6 w-6 rounded p-2"
+                        v-model="isProject"
+                      />
+                    </div>
+                  </label>
                 </div>
               </div>
             </div>
@@ -203,6 +215,7 @@
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import Pagination from "@/Components/Pagination.vue";
+import Checkbox from "@/Components/Checkbox.vue";
 import { ref, watch, defineProps } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 
@@ -215,6 +228,8 @@ const props = defineProps({
 const search = ref("");
 const group = ref("");
 const academicSession = ref("");
+const isProject = ref(false);
+
 const perPage = ref(5);
 
 const rep = ref(
@@ -236,6 +251,7 @@ watch(search, (value) => {
       perPage: perPage.value,
       academicSession: academicSession.value,
       group: group.value,
+      isProject: isProject.value,
     },
     {
       preserveState: true,
@@ -249,6 +265,24 @@ watch(group, (value) => {
     "/admin/management",
     {
       group: value,
+      perPage: perPage.value,
+      search: search.value,
+      academicSession: academicSession.value,
+      isProject: isProject.value,
+    },
+    {
+      preserveState: true,
+      replace: true,
+    }
+  );
+});
+
+watch(isProject, (value) => {
+  Inertia.get(
+    "/admin/management",
+    {
+      isProject: isProject.value,
+      group: group.value,
       perPage: perPage.value,
       search: search.value,
       academicSession: academicSession.value,
@@ -268,6 +302,7 @@ watch(academicSession, (value) => {
       group: group.value,
       perPage: perPage.value,
       search: search.value,
+      isProject: isProject.value,
     },
     {
       preserveState: true,

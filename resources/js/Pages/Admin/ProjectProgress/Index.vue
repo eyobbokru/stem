@@ -89,6 +89,7 @@
                             route('admin.projectProgress.edit', project.id)
                           "
                           class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                          v-if="project.isProjectActive"
                         >
                           Progress
                         </Link>

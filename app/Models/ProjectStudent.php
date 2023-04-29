@@ -16,4 +16,9 @@ class ProjectStudent extends Model
     {
         return $this->hasMany(Student::class, 'student_id');
     }
+
+    public function project()
+    {
+        return $this->hasOne(Project::class, 'id','project_id');
+    }
 }
