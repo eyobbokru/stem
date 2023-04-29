@@ -116,6 +116,7 @@ class ProjectProgressController extends Controller
             $progress->image_video = Null;
         }
 
+        
         $progress->save();
 
         return Redirect::route('admin.projectProgress.index')->with('flash.banner', 'Progress add successfully');
