@@ -106,15 +106,8 @@ class IncubationProjectProgressController extends Controller
          if (Request::hasFile('image_video')) {
             //  $file = Request::file('image_video');
             //  $filename = date('YmdHi') . $file->getClientOriginalName();
-            //  $file->move(public_path('public/files'), $filename);
-
-            
- 
-             $progress->image_video = Storage::putFile(
-                'public/progressFiles',
-                Request::file('image_video'));
-
-  
+      
+            $progress->image_video = Request::file('image_video')->store('progressFiles', 'public');
          } else {
              $progress->image_video = Null;
          }

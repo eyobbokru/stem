@@ -123,9 +123,8 @@ class ProjectProgressController extends Controller
                 // store the file
         if (Request::hasFile('image_video')) {
        
-            $progress->image_video = Storage::putFile(
-                        'public/progressFiles',
-                        Request::file('image_video'));
+            $progress->image_video = Request::file('image_video')->store('progressFiles', 'public');
+
         } else {
             $progress->image_video = Null;
         }
