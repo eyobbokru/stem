@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreNewsRequest;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateNewsRequest;
 use Illuminate\Support\Facades\Redirect;
 
@@ -64,10 +65,7 @@ class NewsController extends Controller
         $news->description = $request->input('description');
 
         if ($request->hasFile('imagePath')) {
-            $file = $request->file('imagePath');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $filename);
-            $news->imagePath = $filename;
+            $news->imagePath =Request::file('imagePath')->store('newsFile', 'public');
         } else {
             $news->imagePath = Null;
         }
@@ -117,17 +115,14 @@ class NewsController extends Controller
         $news->description = $request->input('description');
 
         if ($request->hasFile('imagePath')) {
-            $path = public_path() . '/public/Image/';
+           
 
             if ($news->imagePath) {
-                $file_old = $path . $news->imagePath;
+                $file_old = storage_path(). $news->imagePath;
                 unlink($file_old);
             }
 
-            $file = $request->file('imagePath');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $filename);
-            $news->imagePath = $filename;
+            $news->imagePath = Request::file('imagePath')->store('newsFile', 'public');
         }
 
         $news->save();
@@ -144,6 +139,8 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        $news->delete();
+        return Redirect::route('stem.news.index')->with('flash.banner', 'News deleted.')->with('flash.bannerStyle', 'danger');
+
     }
 }

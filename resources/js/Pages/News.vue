@@ -132,7 +132,7 @@ function formatDateDay(date) {
           >
             <div class="flex justify-center">
               <img
-                :src="'/public/Image/' + news.imagePath"
+                :src="'/storage/' + news.imagePath"
                 alt="blog"
                 class="h-[350px]"
               />

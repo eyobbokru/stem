@@ -21,27 +21,13 @@ function formatDateDay(date) {
   <DashboardLayout title="create lab">
     <div class="py-2">
       <div
-        class="
-          max-w-7xl
-          mx-auto
-          mb-8
-          p-6
-          overflow-hidden
-          bg-white
-          rounded-lg
-          shadow-lg
-        "
+        class="max-w-7xl mx-auto mb-8 p-6 overflow-hidden bg-white rounded-lg shadow-lg"
       >
         <section class="container mx-auto p-6 font-mono">
           <div>
             <!-- Page Title -->
 
             <!--End Page Title-->
-            <PageTitle>
-              <template #title>
-                <h1 class="text-5xl">Read Details</h1>
-              </template>
-            </PageTitle>
 
             <!--Sidebar Page Container-->
             <div class="sidebar-page-container">
@@ -67,21 +53,12 @@ function formatDateDay(date) {
                 <div class="row clearfix">
                   <!-- Sidebar Side -->
                   <div
-                    class="
-                      sidebar-side
-                      style-two
-                      blog-sidebar
-                      col-lg-3 col-md-12 col-sm-12
-                    "
+                    class="sidebar-side style-two blog-sidebar col-lg-3 col-md-12 col-sm-12"
                   ></div>
 
                   <!-- Content Side -->
                   <div
-                    class="
-                      content-side
-                      blog-detail-column
-                      col-lg-9 col-md-12 col-sm-12
-                    "
+                    class="content-side blog-detail-column col-lg-9 col-md-12 col-sm-12"
                   >
                     <div class="blog-detail">
                       <div class="inner-box">
@@ -100,7 +77,7 @@ function formatDateDay(date) {
                           <!-- <img src="https://via.placeholder.com/790x350" alt="" /> -->
                           <img
                             v-if="news.imagePath"
-                            :src="'/public/Image/' + news.imagePath"
+                            :src="'storage/' + news.imagePath"
                             alt=""
                             style="width: 790px; height: 350px"
                           />
