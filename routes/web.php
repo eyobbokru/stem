@@ -35,7 +35,9 @@ use App\Http\Controllers\Admin\GradeStudentController;
 use App\Http\Controllers\Admin\AcademicSessionController;
 use App\Http\Controllers\IncubationController;
 use App\Http\Controllers\IncubationProjectProgressController;
+use App\Http\Controllers\LabEquipmentController;
 use App\Models\Incubation;
+use App\Models\LabEquipment;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +90,7 @@ Route::middleware([
     Route::resource('/course', CourseController::class);
     Route::resource('/gradeStudent', GradeStudentController::class);
     Route::resource('/lab', LabController::class);
+    Route::resource('/labEquipment', LabEquipmentController::class);
     Route::resource('/academicSession', AcademicSessionController::class);
     Route::resource('/student', StudentController::class);
     Route::resource('/management', ManagementController::class);

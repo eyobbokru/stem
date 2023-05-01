@@ -1,8 +1,8 @@
 <template>
-  <DashboardLayout title="create lab">
+  <DashboardLayout title="edit grade">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Create Lab
+        Edit Grade
       </h2>
     </template>
 
@@ -11,7 +11,7 @@
         <section class="container mx-auto p-6 font-mono">
           <div class="w-full flex mb-4 p-2">
             <Link
-              :href="route('admin.lab.index')"
+              :href="route('admin.labEquipment.index')"
               class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
             >
               Back
@@ -37,47 +37,47 @@
                   {{ form.errors.name }}
                 </div>
 
-                <jet-label for="address" value="Address" />
-                <jet-input
-                  id="address"
-                  type="text"
-                  class="mt-1 block w-full"
-                  v-model="form.address"
-                  autofocus
-                  autocomplete="title"
-                  required
-                />
-                <div class="text-sm text-red-400" v-if="form.errors.address">
-                  {{ form.errors.address }}
-                </div>
-
-                <jet-label for="department" value="Department" />
+                <jet-label for="type" value="Type" />
                 <select
                   id="department"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="form.department"
+                  v-model="form.type"
                   required
                 >
-                  <option>Department of Civil Engineering</option>
-                  <option>Department of Architecture</option>
-                  <option>Department of Mining Engineering</option>
-                  <option>Department of Biotechnology</option>
-                  <option>Department of Chemical Engineering</option>
-                  <option>Department of Environmental Engineering</option>
-                  <option>
-                    Department of Electrical and Computer Engineering
-                  </option>
-                  <option>Department of Mechanical Engineering</option>
-                  <option>Department of Electromechanical Engineering</option>
-                  <option>Department of Software Engineering</option>
-                  <option>
-                    Department of Food Science and Applied Nutrition
-                  </option>
-                  <option>Department of Geology</option>
+                  <option>Fixed</option>
+                  <option>Consumable</option>
                 </select>
-                <div class="text-sm text-red-400" v-if="form.errors.department">
-                  {{ form.errors.department }}
+                <div class="text-sm text-red-400" v-if="form.errors.type">
+                  {{ form.errors.type }}
+                </div>
+
+                <jet-label for="address" value="Quantity" />
+                <jet-input
+                  id="address"
+                  type="text"
+                  class="mt-1 block w-full"
+                  v-model="form.quantity"
+                  autofocus
+                  autocomplete="title"
+                  required
+                />
+                <div class="text-sm text-red-400" v-if="form.errors.quantity">
+                  {{ form.errors.si_unit }}
+                </div>
+
+                <jet-label for="address" value="SI Unit" />
+                <jet-input
+                  id="address"
+                  type="text"
+                  class="mt-1 block w-full"
+                  v-model="form.si_unit"
+                  autofocus
+                  autocomplete="title"
+                  required
+                />
+                <div class="text-sm text-red-400" v-if="form.errors.si_unit">
+                  {{ form.errors.si_unit }}
                 </div>
 
                 <div class="flex items-center mt-4">
@@ -105,16 +105,20 @@ import { ref, watch } from "vue";
 import JetButton from "@/Jetstream/Button.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetLabel from "@/Jetstream/Label.vue";
+import JetCheckbox from "@/Jetstream/Checkbox.vue";
 
-const props = defineProps({});
+const props = defineProps({
+  labEquipment: Object,
+});
 
 const form = useForm({
-  name: "",
-  address: "",
-  department: "",
+  name: props.labEquipment.name,
+  type: props.labEquipment.type,
+  quantity: props.labEquipment.quantity,
+  si_unit: props.labEquipment.si_unit,
 });
 
 function storeParam() {
-  form.post("/admin/lab");
+  form.put("/admin/labEquipment/" + props.labEquipment.id);
 }
 </script>
