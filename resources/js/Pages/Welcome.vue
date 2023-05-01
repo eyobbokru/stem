@@ -223,7 +223,7 @@ function formatDateDay(date) {
           >
             <div class="blog_image">
               <img
-                :src="'/public/Image/' + news.imagePath"
+                :src="'/storage/' + news.imagePath"
                 alt="blog"
                 class="w-full h-[350px]"
               />

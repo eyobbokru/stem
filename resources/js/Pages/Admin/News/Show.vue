@@ -73,11 +73,11 @@ function formatDateDay(date) {
                             >
                           </li>
                         </ul>
-                        <div class="image">
+                        <div class="image flex item-center">
                           <!-- <img src="https://via.placeholder.com/790x350" alt="" /> -->
                           <img
                             v-if="news.imagePath"
-                            :src="'storage/' + news.imagePath"
+                            :src="'/storage/' + news.imagePath"
                             alt=""
                             style="width: 790px; height: 350px"
                           />
