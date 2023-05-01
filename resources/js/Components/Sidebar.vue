@@ -518,6 +518,100 @@
           <a
             type="button"
             class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+            @click="toggleSubMenu5"
+            v-if="$page.props.permission.includes('student list')"
+          >
+            <span
+              class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="h-4 w-4"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm2.023 6.828a.75.75 0 10-1.06-1.06 3.75 3.75 0 01-5.304 0 .75.75 0 00-1.06 1.06 5.25 5.25 0 007.424 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+            <span>Lab Related</span>
+            <span
+              class="absolute right-0 ml-auto mr-[0.8rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-gray-600 dark:[&>svg]:text-gray-300"
+              data-te-sidenav-rotate-icon-ref
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="h-5 w-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </a>
+
+          <ul class="relative m-0 p-0" v-show="showSubMenu5">
+            <li>
+              <Link
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url === '/admin/labEquipment'
+                    ? activeClass
+                    : inactiveClass,
+                ]"
+                :href="route('admin.labEquipment.index')"
+                v-if="$page.props.permission.includes('lab_equipment list')"
+              >
+                <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+                <span class="mx-4">add material</span>
+              </Link>
+
+              <Link
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url === '/admin/incubation'
+                    ? activeClass
+                    : inactiveClass,
+                ]"
+                :href="route('admin.incubation.index')"
+                v-if="$page.props.permission.includes('management list')"
+              >
+                <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+                <span class="mx-4">add lab material</span>
+              </Link>
+            </li>
+            <li class="relative">
+              <Link
+                class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+                :class="[
+                  $page.url === 'admin/incProProgress'
+                    ? activeClass
+                    : inactiveClass,
+                ]"
+                :href="route('admin.incProProgress.index')"
+                v-if="$page.props.permission.includes('management list')"
+              >
+                <img src="/images/school.svg" alt="school" class="w-5 h-5" />
+
+                <span class="mx-4">Report status</span>
+              </Link>
+            </li>
+          </ul>
+        </li>
+
+        <li class="relative m-0 x-[0.2rem]">
+          <a
+            type="button"
+            class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
             @click="toggleSubMenu3"
             v-if="$page.props.permission.includes('project list')"
           >
@@ -615,6 +709,7 @@ const showSubMenu1 = ref(false);
 const showSubMenu2 = ref(false);
 const showSubMenu3 = ref(false);
 const showSubMenu4 = ref(false);
+const showSubMenu5 = ref(false);
 
 function toggleSubMenu1() {
   showSubMenu1.value = !showSubMenu1.value;
@@ -629,6 +724,9 @@ function toggleSubMenu3() {
 
 function toggleSubMenu4() {
   showSubMenu4.value = !showSubMenu4.value;
+}
+function toggleSubMenu5() {
+  showSubMenu5.value = !showSubMenu5.value;
 }
 
 const { isOpen } = useSidebar();
