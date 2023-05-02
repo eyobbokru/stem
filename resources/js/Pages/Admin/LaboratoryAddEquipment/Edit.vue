@@ -2,7 +2,7 @@
   <DashboardLayout title="create project">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        add project progress
+        add equipment to labs
       </h2>
     </template>
 
@@ -11,7 +11,7 @@
         <section class="container mx-auto p-6 font-mono">
           <div class="w-full flex mb-4 p-2">
             <Link
-              :href="route('admin.incProProgress.index')"
+              :href="route('admin.addEquipment.index')"
               class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
             >
               Back
@@ -28,7 +28,7 @@
                   id="title"
                   type="text"
                   class="mt-1 block w-full"
-                  v-model="incubation.name"
+                  v-model="lab.name"
                   autofocus
                   autocomplete="title"
                   required
@@ -43,28 +43,67 @@
                     <div class="mt-1 block w-full mb-3">
                       <div>
                         <div>
-                          <label class="text-gray-700" for="username"
-                            >Progress Report</label
+                          <label class="text-gray-700" for="grade"
+                            >Equipment</label
                           >
-
-                          <Textarea
-                            v-model="form.progressReport"
-                            rows="5"
-                            cols="155"
-                            class="mt- block w-full"
-                          />
-                        </div>
-
-                        <div>
-                          <jet-label for="des" value="File" />
-                          <jet-input
-                            type="file"
-                            class="mt-1 block w-full"
-                            @input="form.image_video = $event.target.files[0]"
-                          />
+                          <select
+                            class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
+                            v-model="form.lab_equipment_id"
+                          >
+                            <option
+                              v-for="(equipment, index) of equipments"
+                              :key="index"
+                              :value="equipment.id"
+                            >
+                              {{ equipment.name }}
+                            </option>
+                          </select>
+                          <div
+                            class="text-sm text-red-400"
+                            v-if="form.errors.lab_equipment_id"
+                          >
+                            {{ form.errors.lab_equipment_id }}
+                          </div>
                         </div>
                       </div>
 
+                      <div>
+                        <jet-label for="title" value="Quantity" />
+                        <jet-input
+                          id="title"
+                          type="text"
+                          class="mt-1 block w-full"
+                          v-model="form.quantity"
+                          autofocus
+                          autocomplete="title"
+                          required
+                        />
+                        <div
+                          class="text-sm text-red-400"
+                          v-if="form.errors.quantity"
+                        >
+                          {{ form.errors.quantity }}
+                        </div>
+                      </div>
+
+                      <div>
+                        <jet-label for="title" value="Number/Size" />
+                        <jet-input
+                          id="title"
+                          type="number"
+                          class="mt-1 block w-full"
+                          v-model="form.number"
+                          autofocus
+                          autocomplete="title"
+                          required
+                        />
+                        <div
+                          class="text-sm text-red-400"
+                          v-if="form.errors.number"
+                        >
+                          {{ form.errors.number }}
+                        </div>
+                      </div>
                       <br />
                       <div class="flex items-center mt-4">
                         <jet-button
@@ -76,37 +115,6 @@
                         </jet-button>
                       </div>
                       <br />
-
-                      <template
-                        v-for="(prog, index) in incubation.progress
-                          .slice()
-                          .reverse()"
-                        :key="index"
-                      >
-                        <div class="mb-3">
-                          <label class="text-gray-700" for="username"
-                            >Progress Report : on ({{
-                              formatDate(prog.created_at)
-                            }})</label
-                          >
-
-                          <Textarea
-                            v-model="prog.progressReport"
-                            rows="5"
-                            cols="155"
-                            class="mt- block w-full"
-                            disabled
-                          />
-                        </div>
-
-                        <div>
-                          <a
-                            class="mt-1 underline text-blue-600"
-                            :href="'/storage/' + prog.image_video"
-                            >File: {{ prog.image_video }}</a
-                          >
-                        </div>
-                      </template>
                     </div>
                   </div>
                 </section>
@@ -132,29 +140,29 @@ import Textarea from "primevue/textarea";
 
 const props = defineProps({
   students: Object,
-  incubation: Object,
+  lab: Object,
+  equipments: Object,
 });
 
 const form = useForm({
-  image_video: "",
-  progressReport: "",
+  lab_id: props.lab.id,
+  lab_equipment_id: "",
+  quantity: "",
+  number: "",
   // stage: props.incubation.stage,
 });
-
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-GB");
-}
 
 function storeParam() {
   // form.post("/admin/project");
   // form.put("/admin/projectProgress/" + props.project.id);
 
-  Inertia.post(`/admin/incProProgress/${props.incubation.id}`, {
+  Inertia.post(`/admin/addEquipment/${props.lab.id}`, {
     _method: "put",
     // stage: form.stage,
-    image_video: form.image_video,
-    progressReport: form.progressReport,
+    lab_id: form.lab_id,
+    lab_equipment_id: form.lab_equipment_id,
+    quantity: form.quantity,
+    number: form.number,
   });
 }
 </script>

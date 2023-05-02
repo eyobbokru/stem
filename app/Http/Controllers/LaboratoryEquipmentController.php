@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lab;
+use App\Models\LabEquipment;
+use App\Models\LaboratoryEquipment;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -70,12 +72,15 @@ class LaboratoryEquipmentController extends Controller
      */
     public function edit($id)
     {
-        $incubation = Lab::findOrFail($id);
+        $lab = Lab::findOrFail($id);
 
-        
-       
-        return Inertia::render('Admin/IncubationProjectProgress/Edit', [
-             'incubation' => $incubation
+        // list equipments filter
+         $equipments = LabEquipment::all();
+
+           
+        return Inertia::render('Admin/LaboratoryAddEquipment/Edit', [
+             'lab' => $lab,
+             'equipments'=>$equipments,
         ]);
     }
 
@@ -88,7 +93,13 @@ class LaboratoryEquipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    //   dd(Request::all());
+
+      // Laboratory equipment and add
+      LaboratoryEquipment::create(Request::only('lab_id','lab_equipment_id','quantity','number'));
+
+      return Redirect::route('admin.addEquipment.index')->with('flash.banner', 'equipment add successfully');
+
     }
 
     /**
