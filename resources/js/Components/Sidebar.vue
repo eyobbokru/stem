@@ -577,12 +577,12 @@
               <Link
                 class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
                 :class="[
-                  $page.url === '/admin/incubation'
+                  $page.url === '/admin/addEquipment'
                     ? activeClass
                     : inactiveClass,
                 ]"
-                :href="route('admin.incubation.index')"
-                v-if="$page.props.permission.includes('management list')"
+                :href="route('admin.addEquipment.index')"
+                v-if="$page.props.permission.includes('lab_equipment list')"
               >
                 <img src="/images/school.svg" alt="school" class="w-5 h-5" />
 

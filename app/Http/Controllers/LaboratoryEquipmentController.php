@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lab;
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 
@@ -17,7 +17,17 @@ class LaboratoryEquipmentController extends Controller
      */
     public function index()
     {
-        //
+        $perPage = Request::input('perPage') ?: 5;
+        return Inertia::render('Admin/LaboratoryAddEquipment/Index', [
+            'labs' => Lab::query()
+                ->when(Request::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->latest()
+                ->paginate($perPage)
+                ->withQueryString(),
+            'filters' => Request::only(['search', 'perPage'])
+        ]);
     }
 
     /**

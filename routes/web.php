@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\AcademicSessionController;
 use App\Http\Controllers\IncubationController;
 use App\Http\Controllers\IncubationProjectProgressController;
 use App\Http\Controllers\LabEquipmentController;
+use App\Http\Controllers\LaboratoryEquipmentController;
 use App\Models\Incubation;
 use App\Models\LabEquipment;
 
@@ -106,6 +107,7 @@ Route::middleware([
 
     Route::resource('/incubation', IncubationController::class);
     Route::resource('/incProProgress', IncubationProjectProgressController::class);
+    Route::resource('/addEquipment', LaboratoryEquipmentController::class);
 
     Route::get('/attendance', [PdfGenerateController::class, 'attendance'])->name('attendance');
     Route::get('/grades', [GradeController::class, 'grade'])->name('grades');
