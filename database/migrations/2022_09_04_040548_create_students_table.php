@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('lname');
             $table->string('sex');
             $table->string('age');
-            $table->foreignId('grade_id')->references('id')->on('grades')->constrained()->cascadeOnDelete();
+            $table->foreignId('grade_students_id')->references('id')->on('grade_students')->constrained()->cascadeOnDelete();
             $table->foreignId('school_id')->references('id')->on('schools')->constrained()->cascadeOnDelete();
 
             $table->timestamps();

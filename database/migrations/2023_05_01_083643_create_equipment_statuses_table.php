@@ -17,7 +17,9 @@ return new class extends Migration
 
         Schema::create('equipment_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('laboratory_equipment_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreignId('laboratory_equipment_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('laboratory_equipment_id')->references('id')->on('laboratory_equipment')->constrained()->cascadeOnDelete();
+           
             $table->text('description');
             $table->string('number');
             $table->string('status');

@@ -21,9 +21,12 @@ return new class extends Migration
             $table->string('quantity');
             $table->string('number');
             // $table->foreignId('lab_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignIdFor(\App\Models\Lab::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-
-            $table->foreignId('lab_equipment_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('lab_id')->references('id')->on('labs')->constrained()->cascadeOnDelete();
+         
+            // $table->foreignIdFor(\App\Models\Lab::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreignId('lab_equipment_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('lab_equipment_id')->references('id')->on('lab_equipment')->constrained()->cascadeOnDelete();
+            
             $table->timestamps();
         });
 
