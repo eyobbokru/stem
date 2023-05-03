@@ -9,7 +9,8 @@ class LaboratoryEquipment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['lab_id', 'lab_equipment_id', 'quantity', 'number', 'status'];
+    protected $fillable = ['lab_id', 'lab_equipment_id', 
+    'quantity', 'number', 'status'];
 
     public function laboratory()
     {
