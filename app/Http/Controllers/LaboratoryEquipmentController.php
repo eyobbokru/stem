@@ -61,7 +61,15 @@ class LaboratoryEquipmentController extends Controller
      */
     public function show($id)
     {
-        //
+        #get lab with it equipment and show equipments
+
+        $lab = Lab::with('equipments')->find($id);
+
+        // dd($lab);
+
+        return Inertia::render('Admin/LaboratoryAddEquipment/Show', [
+            'lab' => $lab
+       ]);
     }
 
     /**
@@ -75,7 +83,7 @@ class LaboratoryEquipmentController extends Controller
         $lab = Lab::findOrFail($id);
 
         // list equipments filter
-         $equipments = LabEquipment::all();
+        $equipments = LabEquipment::all();
 
            
         return Inertia::render('Admin/LaboratoryAddEquipment/Edit', [
@@ -96,8 +104,23 @@ class LaboratoryEquipmentController extends Controller
     //   dd(Request::all());
 
       // Laboratory equipment and add
-      LaboratoryEquipment::create(Request::only('lab_id','lab_equipment_id','quantity','number'));
+      // check if item exist in the with lab_id,
+      $lab = Lab::with('equipments')->find($id);
+    //   dd($lab);
+// dd(Request::input('lab_equipment_id'));
+    foreach($lab->equipments as $equipments){
+            if($equipments->id == Request::input('lab_equipment_id')){
 
+                // equipment already exists
+            //    $labeq =  LaboratoryEquipment::where('lab_equipment_id',$equipments->id)->first();
+            return Redirect::back()->with('flash.banner', 'equipment item already exists')->with('flash.bannerStyle', 'danger');;
+
+
+            }
+    }
+
+    //   LaboratoryEquipment::create(Request::only('lab_id','lab_equipment_id','quantity','number'));
+    dd("here");
       return Redirect::route('admin.addEquipment.index')->with('flash.banner', 'equipment add successfully');
 
     }
