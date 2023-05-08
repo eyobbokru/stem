@@ -80,7 +80,7 @@
                           :href="route('admin.addEquipment.show', lab.id)"
                           class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
                         >
-                          Show
+                          Show equipments added
                         </Link>
                         <Link
                           :href="route('admin.addEquipment.edit', lab.id)"
