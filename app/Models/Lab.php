@@ -13,4 +13,16 @@ class Lab extends Model
         'address',
         'department',
     ];
+
+    public function equipments()
+    {
+        return $this->hasManyThrough(LabEquipment::class, 
+        LaboratoryEquipment::class, 
+        'lab_id',
+        'id',
+        'id',
+        'id'
+    );
+    }
+
 }
