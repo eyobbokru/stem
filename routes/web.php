@@ -3,24 +3,29 @@
 
 use App\Models\News;
 use Inertia\Inertia;
-use App\Models\GradeStudent;
+use App\Models\Incubation;
 
+use App\Models\GradeStudent;
+use App\Models\LabEquipment;
 use App\Models\AcademicSession;
 use App\Models\ProjectProgress;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\LabEquipmentStatus;
 use App\Http\Controllers\Admin\LabController;
+
 use App\Http\Controllers\Admin\CallController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\IncubationController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\MuseumItemsController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\SchoolController;
+use App\Http\Controllers\LabEquipmentController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
@@ -32,13 +37,9 @@ use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\GradeReportController;
 use App\Http\Controllers\Admin\PdfGenerateController;
 use App\Http\Controllers\Admin\GradeStudentController;
-use App\Http\Controllers\Admin\AcademicSessionController;
-use App\Http\Controllers\IncubationController;
-use App\Http\Controllers\IncubationProjectProgressController;
-use App\Http\Controllers\LabEquipmentController;
 use App\Http\Controllers\LaboratoryEquipmentController;
-use App\Models\Incubation;
-use App\Models\LabEquipment;
+use App\Http\Controllers\Admin\AcademicSessionController;
+use App\Http\Controllers\IncubationProjectProgressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,7 +110,7 @@ Route::middleware([
     Route::resource('/incProProgress', IncubationProjectProgressController::class);
     Route::resource('/addEquipment', LaboratoryEquipmentController::class);
     // equipment status
-    Route::resource('/addEquipment', LaboratoryEquipmentController::class);
+    Route::resource('/equipmentStatus', LabEquipmentStatus::class);
 
     Route::get('/attendance', [PdfGenerateController::class, 'attendance'])->name('attendance');
     Route::get('/grades', [GradeController::class, 'grade'])->name('grades');

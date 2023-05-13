@@ -11,7 +11,7 @@
         <section class="container mx-auto p-6 font-mono">
           <div class="w-full flex mb-4 p-2 justify-end">
             <Link
-              :href="route('admin.labEquipment.create')"
+              :href="route('admin.equipmentStatus.create')"
               class="px-4 py-2 bg-green-600 hover:bg-green-800 text-white rounded-lg"
             >
               Create Lab Equipment
@@ -41,7 +41,7 @@
                     <input
                       v-model="search"
                       type="text"
-                      placeholder="Search by labEquipment"
+                      placeholder="Search by equipmentStatus"
                       class="px-8 py-3 w-full md:w-2/6 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                     />
                   </div>
@@ -77,28 +77,19 @@
                     :key="labEquipment.id"
                     class="text-gray-700"
                   >
-                    <td class="px-4 py-3 border">{{ labEquipment.name }}</td>
+                    <td class="px-4 py-3 border">
+                      {{ labEquipment.equipment["name"] }}
+                    </td>
 
                     <td class="px-4 py-3 text-sm border">
                       <div class="flex justify-around">
                         <Link
                           :href="
-                            route('admin.labEquipment.edit', labEquipment.id)
+                            route('admin.equipmentStatus.edit', labEquipment.id)
                           "
                           class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
                         >
-                          Edit
-                        </Link>
-                        <Link
-                          :href="
-                            route('admin.labEquipment.destroy', labEquipment.id)
-                          "
-                          method="delete"
-                          as="button"
-                          type="button"
-                          class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
-                        >
-                          Delete
+                          Report
                         </Link>
                       </div>
                     </td>
@@ -133,7 +124,7 @@ const perPage = ref(5);
 
 watch(search, (value) => {
   Inertia.get(
-    "/admin/labEquipment",
+    "/admin/equipmentStatus",
     { search: value, perPage: perPage.value },
     {
       preserveState: true,
@@ -144,7 +135,7 @@ watch(search, (value) => {
 
 function getTags() {
   Inertia.get(
-    "/admin/labEquipment",
+    "/admin/equipmentStatus",
     { perPage: perPage.value, search: search.value },
     {
       preserveState: true,

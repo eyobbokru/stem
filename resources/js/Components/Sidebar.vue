@@ -597,7 +597,7 @@
                     ? activeClass
                     : inactiveClass,
                 ]"
-                :href="route('admin.incProProgress.index')"
+                :href="route('admin.equipmentStatus.index')"
                 v-if="$page.props.permission.includes('management list')"
               >
                 <img src="/images/school.svg" alt="school" class="w-5 h-5" />

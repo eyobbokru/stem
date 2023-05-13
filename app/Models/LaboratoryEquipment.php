@@ -21,5 +21,10 @@ class LaboratoryEquipment extends Model
         return $this->hasOne(LabEquipment::class, 'id', 'lab_equipment_id');
     }
 
+    public function reportStatus()
+    {
+        return $this->hasMany(EquipmentStatus::class, 'laboratory_equipment_id', 'id');
+    }
+
 
 }
