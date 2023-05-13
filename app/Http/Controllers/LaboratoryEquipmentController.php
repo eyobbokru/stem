@@ -120,7 +120,7 @@ class LaboratoryEquipmentController extends Controller
     }
 
     //   LaboratoryEquipment::create(Request::only('lab_id','lab_equipment_id','quantity','number'));
-    dd("here");
+  
       return Redirect::route('admin.addEquipment.index')->with('flash.banner', 'equipment add successfully');
 
     }
